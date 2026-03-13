@@ -26,10 +26,10 @@ P.general = {
 	font = "PT Sans Narrow",
 	fontSize = 12,
 	fontStyle = "OUTLINE",
-	bordercolor = {r = 0, g = 0, b = 0},
-	backdropcolor = {r = 0.1, g = 0.1, b = 0.1},
-	backdropfadecolor = {r = 0.06, g = 0.06, b = 0.06, a = 0.8},
-	valuecolor = {r = 0.99, g = 0.48, b = 0.17},
+	bordercolor = { r = 0, g = 0, b = 0 },
+	backdropcolor = { r = 0.1, g = 0.1, b = 0.1 },
+	backdropfadecolor = { r = 0.06, g = 0.06, b = 0.06, a = 0.8 },
+	valuecolor = { r = 0.99, g = 0.48, b = 0.17 },
 	cropIcon = 2,
 	minimap = {
 		size = 176,
@@ -124,7 +124,7 @@ P.databars = {
 		hideInCombat = false,
 		showBubbles = false,
 		questXP = {
-			color = {r = 0, g = 1, b = 0, a = 0.4},
+			color = { r = 0, g = 1, b = 0, a = 0.4 },
 			tooltip = true,
 			questCurrentZoneOnly = false,
 			questCompletedOnly = false
@@ -180,11 +180,11 @@ P.bags = {
 	itemLevelFontSize = 10,
 	itemLevelFontOutline = "MONOCHROMEOUTLINE",
 	itemLevelCustomColorEnable = false,
-	itemLevelCustomColor = {r = 1, g = 1, b = 1},
+	itemLevelCustomColor = { r = 1, g = 1, b = 1 },
 	countFont = "Homespun",
 	countFontSize = 10,
 	countFontOutline = "MONOCHROMEOUTLINE",
-	countFontColor = {r = 1, g = 1, b = 1},
+	countFontColor = { r = 1, g = 1, b = 1 },
 	reverseSlots = false,
 	clearSearchOnClose = false,
 	disableBagSort = false,
@@ -198,20 +198,20 @@ P.bags = {
 	questItemColors = true,
 	colors = {
 		profession = {
-			quiver = {r = 1, g = 0.69, b = 0.41},
-			ammoPouch = {r = 1, g = 0.69, b = 0.41},
-			soulBag = {r = 1, g = 0.69, b = 0.41},
-			leatherworking = {r = 0.88, g = 0.73, b = 0.29},
-			inscription = {r = 0.29, g = 0.30, b = 0.88},
-			herbs = {r = 0.07, g = 0.71, b = 0.13},
-			enchanting = {r = 0.76, g = 0.02, b = 0.8},
-			engineering = {r = 0.91, g = 0.46, b = 0.18},
-			gems = {r = 0.03, g = 0.71, b = 0.81},
-			mining = {r = 0.54, g = 0.40, b = 0.04}
+			quiver = { r = 1, g = 0.69, b = 0.41 },
+			ammoPouch = { r = 1, g = 0.69, b = 0.41 },
+			soulBag = { r = 1, g = 0.69, b = 0.41 },
+			leatherworking = { r = 0.88, g = 0.73, b = 0.29 },
+			inscription = { r = 0.29, g = 0.30, b = 0.88 },
+			herbs = { r = 0.07, g = 0.71, b = 0.13 },
+			enchanting = { r = 0.76, g = 0.02, b = 0.8 },
+			engineering = { r = 0.91, g = 0.46, b = 0.18 },
+			gems = { r = 0.03, g = 0.71, b = 0.81 },
+			mining = { r = 0.54, g = 0.40, b = 0.04 }
 		},
 		items = {
-			questStarter = {r = 1, g = 1, b = 0},
-			questItem = {r = 1, g = 0.30, b = 0.30}
+			questStarter = { r = 1, g = 1, b = 0 },
+			questItem = { r = 1, g = 0.30, b = 0.30 }
 		}
 	},
 	vendorGrays = {
@@ -240,22 +240,22 @@ P.bags = {
 		override = false,
 		reverse = false,
 		threshold = 3,
-		expiringColor = {r = 1, g = 0, b = 0},
-		secondsColor = {r = 1, g = 1, b = 1},
-		minutesColor = {r = 1, g = 1, b = 1},
-		hoursColor = {r = 1, g = 1, b = 1},
-		daysColor = {r = 1, g = 1, b = 1},
-		expireIndicator = {r = 1, g = 1, b = 1},
-		secondsIndicator = {r = 1, g = 1, b = 1},
-		minutesIndicator = {r = 1, g = 1, b = 1},
-		hoursIndicator = {r = 1, g = 1, b = 1},
-		daysIndicator = {r = 1, g = 1, b = 1},
-		hhmmColorIndicator = {r = 1, g = 1, b = 1},
-		mmssColorIndicator = {r = 1, g = 1, b = 1},
+		expiringColor = { r = 1, g = 0, b = 0 },
+		secondsColor = { r = 1, g = 1, b = 1 },
+		minutesColor = { r = 1, g = 1, b = 1 },
+		hoursColor = { r = 1, g = 1, b = 1 },
+		daysColor = { r = 1, g = 1, b = 1 },
+		expireIndicator = { r = 1, g = 1, b = 1 },
+		secondsIndicator = { r = 1, g = 1, b = 1 },
+		minutesIndicator = { r = 1, g = 1, b = 1 },
+		hoursIndicator = { r = 1, g = 1, b = 1 },
+		daysIndicator = { r = 1, g = 1, b = 1 },
+		hhmmColorIndicator = { r = 1, g = 1, b = 1 },
+		mmssColorIndicator = { r = 1, g = 1, b = 1 },
 
 		checkSeconds = false,
-		hhmmColor = {r = 0.43, g = 0.43, b = 0.43},
-		mmssColor = {r = 0.56, g = 0.56, b = 0.56},
+		hhmmColor = { r = 0.43, g = 0.43, b = 0.43 },
+		mmssColor = { r = 0.56, g = 0.56, b = 0.56 },
 		hhmmThreshold = -1,
 		mmssThreshold = -1,
 
@@ -286,7 +286,7 @@ P.nameplates = {
 		friendly = false,
 		enemy = false,
 	},
-	plateSize ={
+	plateSize = {
 		friendlyWidth = 150,
 		friendlyHeight = 30,
 		enemyWidth = 150,
@@ -317,51 +317,51 @@ P.nameplates = {
 	alwaysShowTargetHealth = true,
 
 	colors = {
-		glowColor = {r = 1, g = 1, b = 1, a = 1},
-		castColor = {r = 1, g = 0.81, b = 0},
-		castNoInterruptColor = {r = 0.78, g = 0.25, b = 0.25},
-		castInterruptedColor = {r = 0.30, g = 0.30, b = 0.30},
+		glowColor = { r = 1, g = 1, b = 1, a = 1 },
+		castColor = { r = 1, g = 0.81, b = 0 },
+		castNoInterruptColor = { r = 0.78, g = 0.25, b = 0.25 },
+		castInterruptedColor = { r = 0.30, g = 0.30, b = 0.30 },
 		castbarDesaturate = true,
 		reactions = {
-			friendlyPlayer = {r = 0.31, g = 0.45, b = 0.63},
-			good = {r = .29, g = .68, b = .30},
-			neutral = {r = .85, g = .77, b = .36},
-			bad = {r = 0.78, g = 0.25, b = 0.25},
+			friendlyPlayer = { r = 0.31, g = 0.45, b = 0.63 },
+			good = { r = .29, g = .68, b = .30 },
+			neutral = { r = .85, g = .77, b = .36 },
+			bad = { r = 0.78, g = 0.25, b = 0.25 },
 		},
 		threat = {
-			goodColor = {r = 75/255, g = 175/255, b = 76/255},
-			badColor = {r = 0.78, g = 0.25, b = 0.25},
-			goodTransition = {r = 218/255, g = 197/255, b = 92/255},
-			badTransition = {r = 235/255, g = 163/255, b = 40/255},
+			goodColor = { r = 75 / 255, g = 175 / 255, b = 76 / 255 },
+			badColor = { r = 0.78, g = 0.25, b = 0.25 },
+			goodTransition = { r = 218 / 255, g = 197 / 255, b = 92 / 255 },
+			badTransition = { r = 235 / 255, g = 163 / 255, b = 40 / 255 },
 		},
 		comboPoints = {
-			[1] = {r = .69, g = .31, b = .31},
-			[2] = {r = .69, g = .31, b = .31},
-			[3] = {r = .65, g = .63, b = .35},
-			[4] = {r = .65, g = .63, b = .35},
-			[5] = {r = .33, g = .59, b = .33}
+			[1] = { r = .69, g = .31, b = .31 },
+			[2] = { r = .69, g = .31, b = .31 },
+			[3] = { r = .65, g = .63, b = .35 },
+			[4] = { r = .65, g = .63, b = .35 },
+			[5] = { r = .33, g = .59, b = .33 }
 		}
 	},
 	cooldown = {
 		override = true,
 		reverse = false,
 		threshold = 3,
-		expiringColor = {r = 1, g = 0, b = 0},
-		secondsColor = {r = 1, g = 1, b = 1},
-		minutesColor = {r = 1, g = 1, b = 1},
-		hoursColor = {r = 1, g = 1, b = 1},
-		daysColor = {r = 1, g = 1, b = 1},
-		expireIndicator = {r = 1, g = 1, b = 1},
-		secondsIndicator = {r = 1, g = 1, b = 1},
-		minutesIndicator = {r = 1, g = 1, b = 1},
-		hoursIndicator = {r = 1, g = 1, b = 1},
-		daysIndicator = {r = 1, g = 1, b = 1},
-		hhmmColorIndicator = {r = 1, g = 1, b = 1},
-		mmssColorIndicator = {r = 1, g = 1, b = 1},
+		expiringColor = { r = 1, g = 0, b = 0 },
+		secondsColor = { r = 1, g = 1, b = 1 },
+		minutesColor = { r = 1, g = 1, b = 1 },
+		hoursColor = { r = 1, g = 1, b = 1 },
+		daysColor = { r = 1, g = 1, b = 1 },
+		expireIndicator = { r = 1, g = 1, b = 1 },
+		secondsIndicator = { r = 1, g = 1, b = 1 },
+		minutesIndicator = { r = 1, g = 1, b = 1 },
+		hoursIndicator = { r = 1, g = 1, b = 1 },
+		daysIndicator = { r = 1, g = 1, b = 1 },
+		hhmmColorIndicator = { r = 1, g = 1, b = 1 },
+		mmssColorIndicator = { r = 1, g = 1, b = 1 },
 
 		checkSeconds = false,
-		hhmmColor = {r = 0.43, g = 0.43, b = 0.43},
-		mmssColor = {r = 0.56, g = 0.56, b = 0.56},
+		hhmmColor = { r = 0.43, g = 0.43, b = 0.43 },
+		mmssColor = { r = 0.56, g = 0.56, b = 0.56 },
 		hhmmThreshold = -1,
 		mmssThreshold = -1,
 
@@ -379,8 +379,8 @@ P.nameplates = {
 		useThreatColor = true
 	},
 	filters = {
-		ElvUI_Boss = {triggers = {enable = false}},
-		ElvUI_Totem = {triggers = {enable = true}}
+		ElvUI_Boss = { triggers = { enable = false } },
+		ElvUI_Totem = { triggers = { enable = true } }
 	},
 	units = {
 		TARGET = {
@@ -998,7 +998,7 @@ P.auras = {
 	barWidth = 2,
 	barHeight = 2,
 	barSpacing = 2,
-	barColor = {r = 0, g = .8, b = 0},
+	barColor = { r = 0, g = .8, b = 0 },
 	barColorGradient = false,
 	barNoDuration = true,
 	buffs = {
@@ -1031,22 +1031,22 @@ P.auras = {
 		override = false,
 		reverse = false,
 		threshold = 3,
-		expiringColor = {r = 1, g = 0, b = 0},
-		secondsColor = {r = 1, g = 1, b = 1},
-		minutesColor = {r = 1, g = 1, b = 1},
-		hoursColor = {r = 1, g = 1, b = 1},
-		daysColor = {r = 1, g = 1, b = 1},
-		expireIndicator = {r = 1, g = 1, b = 1},
-		secondsIndicator = {r = 1, g = 1, b = 1},
-		minutesIndicator = {r = 1, g = 1, b = 1},
-		hoursIndicator = {r = 1, g = 1, b = 1},
-		daysIndicator = {r = 1, g = 1, b = 1},
-		hhmmColorIndicator = {r = 1, g = 1, b = 1},
-		mmssColorIndicator = {r = 1, g = 1, b = 1},
+		expiringColor = { r = 1, g = 0, b = 0 },
+		secondsColor = { r = 1, g = 1, b = 1 },
+		minutesColor = { r = 1, g = 1, b = 1 },
+		hoursColor = { r = 1, g = 1, b = 1 },
+		daysColor = { r = 1, g = 1, b = 1 },
+		expireIndicator = { r = 1, g = 1, b = 1 },
+		secondsIndicator = { r = 1, g = 1, b = 1 },
+		minutesIndicator = { r = 1, g = 1, b = 1 },
+		hoursIndicator = { r = 1, g = 1, b = 1 },
+		daysIndicator = { r = 1, g = 1, b = 1 },
+		hhmmColorIndicator = { r = 1, g = 1, b = 1 },
+		mmssColorIndicator = { r = 1, g = 1, b = 1 },
 
 		checkSeconds = false,
-		hhmmColor = {r = 0.43, g = 0.43, b = 0.43},
-		mmssColor = {r = 0.56, g = 0.56, b = 0.56},
+		hhmmColor = { r = 0.43, g = 0.43, b = 0.43 },
+		mmssColor = { r = 0.56, g = 0.56, b = 0.56 },
 		hhmmThreshold = -1,
 		mmssThreshold = -1
 	}
@@ -1094,8 +1094,8 @@ P.chat = {
 	},
 	tabSelector = "NONE",
 	tabSelectedTextEnabled = false,
-	tabSelectedTextColor = {r = 1, g = 1, b = 1},
-	tabSelectorColor = {r = 0.3, g = 1, b = 0.3},
+	tabSelectedTextColor = { r = 1, g = 1, b = 1 },
+	tabSelectorColor = { r = 0.3, g = 1, b = 0.3 },
 	timeStampFormat = "NONE",
 	keywords = "ElvUI",
 	separateSizes = false,
@@ -1116,12 +1116,12 @@ P.chat = {
 	classColorMentionsChat = true,
 	numAllowedCombatRepeat = 5,
 	useCustomTimeColor = true,
-	customTimeColor = {r = 0.7, g = 0.7, b = 0.7},
+	customTimeColor = { r = 0.7, g = 0.7, b = 0.7 },
 	numScrollMessages = 3,
 	tabFont = "PT Sans Narrow",
 	tabFontSize = 12,
 	tabFontOutline = "NONE",
-	panelColor = {r = 0.06, g = 0.06, b = 0.06, a = 0.8}
+	panelColor = { r = 0.06, g = 0.06, b = 0.06, a = 0.8 }
 }
 
 --Datatexts
@@ -1220,14 +1220,14 @@ P.tooltip = {
 	},
 	useCustomFactionColors = false,
 	factionColors = {
-		[1] = {r = 0.8, g = 0.3, b = 0.22},
-		[2] = {r = 0.8, g = 0.3, b = 0.22},
-		[3] = {r = 0.75, g = 0.27, b = 0},
-		[4] = {r = 0.9, g = 0.7, b = 0},
-		[5] = {r = 0, g = 0.6, b = 0.1},
-		[6] = {r = 0, g = 0.6, b = 0.1},
-		[7] = {r = 0, g = 0.6, b = 0.1},
-		[8] = {r = 0, g = 0.6, b = 0.1}
+		[1] = { r = 0.8, g = 0.3, b = 0.22 },
+		[2] = { r = 0.8, g = 0.3, b = 0.22 },
+		[3] = { r = 0.75, g = 0.27, b = 0 },
+		[4] = { r = 0.9, g = 0.7, b = 0 },
+		[5] = { r = 0, g = 0.6, b = 0.1 },
+		[6] = { r = 0, g = 0.6, b = 0.1 },
+		[7] = { r = 0, g = 0.6, b = 0.1 },
+		[8] = { r = 0, g = 0.6, b = 0.1 }
 	}
 }
 
@@ -1247,22 +1247,22 @@ P.unitframe = {
 		override = true,
 		reverse = false,
 		threshold = 3,
-		expiringColor = {r = 1, g = 0, b = 0},
-		secondsColor = {r = 1, g = 1, b = 1},
-		minutesColor = {r = 1, g = 1, b = 1},
-		hoursColor = {r = 1, g = 1, b = 1},
-		daysColor = {r = 1, g = 1, b = 1},
-		expireIndicator = {r = 1, g = 1, b = 1},
-		secondsIndicator = {r = 1, g = 1, b = 1},
-		minutesIndicator = {r = 1, g = 1, b = 1},
-		hoursIndicator = {r = 1, g = 1, b = 1},
-		daysIndicator = {r = 1, g = 1, b = 1},
-		hhmmColorIndicator = {r = 1, g = 1, b = 1},
-		mmssColorIndicator = {r = 1, g = 1, b = 1},
+		expiringColor = { r = 1, g = 0, b = 0 },
+		secondsColor = { r = 1, g = 1, b = 1 },
+		minutesColor = { r = 1, g = 1, b = 1 },
+		hoursColor = { r = 1, g = 1, b = 1 },
+		daysColor = { r = 1, g = 1, b = 1 },
+		expireIndicator = { r = 1, g = 1, b = 1 },
+		secondsIndicator = { r = 1, g = 1, b = 1 },
+		minutesIndicator = { r = 1, g = 1, b = 1 },
+		hoursIndicator = { r = 1, g = 1, b = 1 },
+		daysIndicator = { r = 1, g = 1, b = 1 },
+		hhmmColorIndicator = { r = 1, g = 1, b = 1 },
+		mmssColorIndicator = { r = 1, g = 1, b = 1 },
 
 		checkSeconds = false,
-		hhmmColor = {r = 0.43, g = 0.43, b = 0.43},
-		mmssColor = {r = 0.56, g = 0.56, b = 0.56},
+		hhmmColor = { r = 0.43, g = 0.43, b = 0.43 },
+		mmssColor = { r = 0.56, g = 0.56, b = 0.56 },
 		hhmmThreshold = -1,
 		mmssThreshold = -1,
 
@@ -1274,7 +1274,7 @@ P.unitframe = {
 		}
 	},
 	colors = {
-		borderColor = {r = 0, g = 0, b = 0},
+		borderColor = { r = 0, g = 0, b = 0 },
 		healthclass = false,
 		forcehealthreaction = false,
 		powerclass = false,
@@ -1289,7 +1289,7 @@ P.unitframe = {
 		healthMultiplier = 0,
 		auraBarByType = true,
 		auraBarTurtle = true,
-		auraBarTurtleColor = {r = 0.56, g = 0.39, b = 0.61},
+		auraBarTurtleColor = { r = 0.56, g = 0.39, b = 0.61 },
 		transparentHealth = false,
 		transparentPower = false,
 		transparentCastbar = false,
@@ -1299,83 +1299,83 @@ P.unitframe = {
 		invertAurabars = false,
 		invertPower = false,
 		invertClasspower = false,
-		castColor = {r = 0.31, g = 0.31, b = 0.31},
-		castNoInterrupt = {r = 0.78, g = 0.25, b = 0.25},
-		castInterruptedColor = {r = 0.30, g = 0.30, b = 0.30},
+		castColor = { r = 0.31, g = 0.31, b = 0.31 },
+		castNoInterrupt = { r = 0.78, g = 0.25, b = 0.25 },
+		castInterruptedColor = { r = 0.30, g = 0.30, b = 0.30 },
 		castClassColor = false,
 		castReactionColor = false,
-		health = {r = 0.31, g = 0.31, b = 0.31},
-		health_backdrop = {r = 0.8, g = 0.01, b = 0.01},
-		health_backdrop_dead = {r = 0.8, g = 0.01, b = 0.01},
-		castbar_backdrop = {r = 0.5, g = 0.5, b = 0.5},
-		classpower_backdrop = {r = 0.5, g = 0.5, b = 0.5},
-		aurabar_backdrop = {r = 0.5, g = 0.5, b = 0.5},
-		power_backdrop = {r = 0.5, g = 0.5, b = 0.5},
-		tapped = {r = 0.55, g = 0.57, b = 0.61},
-		disconnected = {r = 0.84, g = 0.75, b = 0.65},
-		auraBarBuff = {r = 0.31, g = 0.31, b = 0.31},
-		auraBarDebuff = {r = 0.8, g = 0.1, b = 0.1},
+		health = { r = 0.31, g = 0.31, b = 0.31 },
+		health_backdrop = { r = 0.8, g = 0.01, b = 0.01 },
+		health_backdrop_dead = { r = 0.8, g = 0.01, b = 0.01 },
+		castbar_backdrop = { r = 0.5, g = 0.5, b = 0.5 },
+		classpower_backdrop = { r = 0.5, g = 0.5, b = 0.5 },
+		aurabar_backdrop = { r = 0.5, g = 0.5, b = 0.5 },
+		power_backdrop = { r = 0.5, g = 0.5, b = 0.5 },
+		tapped = { r = 0.55, g = 0.57, b = 0.61 },
+		disconnected = { r = 0.84, g = 0.75, b = 0.65 },
+		auraBarBuff = { r = 0.31, g = 0.31, b = 0.31 },
+		auraBarDebuff = { r = 0.8, g = 0.1, b = 0.1 },
 		power = {
-			MANA = {r = 0.31, g = 0.45, b = 0.63},
-			RAGE = {r = 0.78, g = 0.25, b = 0.25},
-			FOCUS = {r = 0.71, g = 0.43, b = 0.27},
-			ENERGY = {r = 0.65, g = 0.63, b = 0.35},
-			RUNIC_POWER = {r = 0, g = 0.82, b = 1}
+			MANA = { r = 0.31, g = 0.45, b = 0.63 },
+			RAGE = { r = 0.78, g = 0.25, b = 0.25 },
+			FOCUS = { r = 0.71, g = 0.43, b = 0.27 },
+			ENERGY = { r = 0.65, g = 0.63, b = 0.35 },
+			RUNIC_POWER = { r = 0, g = 0.82, b = 1 }
 		},
 		reaction = {
-			BAD = {r = 0.78, g = 0.25, b = 0.25},
-			NEUTRAL = {r = 0.85, g = 0.77, b = 0.36},
-			GOOD = {r = 0.29, g = 0.68, b = 0.29}
+			BAD = { r = 0.78, g = 0.25, b = 0.25 },
+			NEUTRAL = { r = 0.85, g = 0.77, b = 0.36 },
+			GOOD = { r = 0.29, g = 0.68, b = 0.29 }
 		},
 		threat = {
-			[ 0] = {r = 0.5, g = 0.5, b = 0.5}, -- low
-			[ 1] = {r = 1.0, g = 1.0, b = 0.5}, -- overnuking
-			[ 2] = {r = 1.0, g = 0.5, b = 0.0}, -- losing threat
-			[ 3] = {r = 1.0, g = 0.2, b = 0.2}, -- tanking securely
+			[0] = { r = 0.5, g = 0.5, b = 0.5 }, -- low
+			[1] = { r = 1.0, g = 1.0, b = 0.5 }, -- overnuking
+			[2] = { r = 1.0, g = 0.5, b = 0.0 }, -- losing threat
+			[3] = { r = 1.0, g = 0.2, b = 0.2 }, -- tanking securely
 		},
 		healPrediction = {
-			personal = {r = 0, g = 1, b = 0.5, a = 0.25},
-			others = {r = 0, g = 1, b = 0, a = 0.25},
+			personal = { r = 0, g = 1, b = 0.5, a = 0.25 },
+			others = { r = 0, g = 1, b = 0, a = 0.25 },
 			maxOverflow = 0
 		},
 		classResources = {
 			comboPoints = {
-				[1] = {r = 0.69, g = 0.31, b = 0.31},
-				[2] = {r = 0.69, g = 0.31, b = 0.31},
-				[3] = {r = 0.65, g = 0.63, b = 0.35},
-				[4] = {r = 0.65, g = 0.63, b = 0.35},
-				[5] = {r = 0.33, g = 0.59, b = 0.33}
+				[1] = { r = 0.69, g = 0.31, b = 0.31 },
+				[2] = { r = 0.69, g = 0.31, b = 0.31 },
+				[3] = { r = 0.65, g = 0.63, b = 0.35 },
+				[4] = { r = 0.65, g = 0.63, b = 0.35 },
+				[5] = { r = 0.33, g = 0.59, b = 0.33 }
 			},
 			DEATHKNIGHT = {
-				[1] = {r = 1, g = 0, b = 0},
-				[2] = {r = 0, g = 1, b = 0},
-				[3] = {r = 0, g = 1, b = 1},
-				[4] = {r = 0.9, g = 0.1, b = 1}
+				[1] = { r = 1, g = 0, b = 0 },
+				[2] = { r = 0, g = 1, b = 0 },
+				[3] = { r = 0, g = 1, b = 1 },
+				[4] = { r = 0.9, g = 0.1, b = 1 }
 			}
 		},
 		frameGlow = {
 			mainGlow = {
 				enable = false,
 				class = false,
-				color = {r = 1, g = 1, b = 1, a = 1}
+				color = { r = 1, g = 1, b = 1, a = 1 }
 			},
 			targetGlow = {
 				enable = true,
 				class = true,
-				color = {r = 1, g = 1, b = 1, a = 1}
+				color = { r = 1, g = 1, b = 1, a = 1 }
 			},
 			mouseoverGlow = {
 				enable = true,
 				class = false,
 				texture = "ElvUI Blank",
-				color = {r = 1, g = 1, b = 1, a = 0.1}
+				color = { r = 1, g = 1, b = 1, a = 0.1 }
 			}
 		},
 		debuffHighlight = {
-			Magic = {r = 0.2, g = 0.6, b = 1, a = 0.45},
-			Curse = {r = 0.6, g = 0, b = 1, a = 0.45},
-			Disease = {r = 0.6, g = 0.4, b = 0, a = 0.45},
-			Poison = {r = 0, g = 0.6, b = 0, a = 0.45},
+			Magic = { r = 0.2, g = 0.6, b = 1, a = 0.45 },
+			Curse = { r = 0.6, g = 0, b = 1, a = 0.45 },
+			Disease = { r = 0.6, g = 0.4, b = 0, a = 0.45 },
+			Poison = { r = 0, g = 0.6, b = 0, a = 0.45 },
 			blendMode = "ADD"
 		}
 	},
@@ -1460,7 +1460,7 @@ P.unitframe = {
 			RestIcon = {
 				enable = true,
 				defaultColor = true,
-				color = {r = 1, g = 1, b = 1, a = 1},
+				color = { r = 1, g = 1, b = 1, a = 1 },
 				anchorPoint = "TOPLEFT",
 				xOffset = -3,
 				yOffset = 6,
@@ -1474,7 +1474,7 @@ P.unitframe = {
 			CombatIcon = {
 				enable = true,
 				defaultColor = true,
-				color = {r = 1, g = 0.2, b = 0.2, a = 1},
+				color = { r = 1, g = 0.2, b = 0.2, a = 1 },
 				anchorPoint = "CENTER",
 				xOffset = 0,
 				yOffset = 0,
@@ -1484,6 +1484,13 @@ P.unitframe = {
 			pvpIcon = {
 				enable = false,
 				anchorPoint = "CENTER",
+				xOffset = 0,
+				yOffset = 0,
+				scale = 1
+			},
+			classIcon = {
+				enable = false,
+				anchorPoint = "LEFT",
 				xOffset = 0,
 				yOffset = 0,
 				scale = 1
@@ -1552,7 +1559,7 @@ P.unitframe = {
 				iconXOffset = -10,
 				iconYOffset = 0,
 				tickWidth = 1,
-				tickColor = {r = 0, g = 0, b = 0, a = 0.8},
+				tickColor = { r = 0, g = 0, b = 0, a = 0.8 },
 				timeToHold = 0,
 				strataAndLevel = {
 					useCustomStrata = false,
@@ -1693,6 +1700,13 @@ P.unitframe = {
 			pvpIcon = {
 				enable = false,
 				anchorPoint = "CENTER",
+				xOffset = 0,
+				yOffset = 0,
+				scale = 1
+			},
+			classIcon = {
+				enable = false,
+				anchorPoint = "LEFT",
 				xOffset = 0,
 				yOffset = 0,
 				scale = 1
@@ -3018,6 +3032,13 @@ P.unitframe = {
 				maxAlpha = 1,
 				delay = 0
 			},
+			classIcon = {
+				enable = false,
+				anchorPoint = "LEFT",
+				xOffset = 0,
+				yOffset = 0,
+				scale = 1
+			},
 			power = {
 				enable = true,
 				text_format = "[powercolor][power:current]",
@@ -3109,13 +3130,13 @@ P.unitframe = {
 					position = "CENTER",
 					xOffset = 0,
 					yOffset = 0,
-					color = {r = 1, g = 0.9, b = 0, a = 1}
+					color = { r = 1, g = 0.9, b = 0, a = 1 }
 				},
 				stack = {
 					position = "BOTTOMRIGHT",
 					xOffset = 0,
 					yOffset = 2,
-					color = {r = 1, g = 0.9, b = 0, a = 1}
+					color = { r = 1, g = 0.9, b = 0, a = 1 }
 				}
 			},
 			castbar = {
@@ -3376,13 +3397,13 @@ P.unitframe = {
 					position = "CENTER",
 					xOffset = 0,
 					yOffset = 0,
-					color = {r = 1, g = 0.9, b = 0, a = 1}
+					color = { r = 1, g = 0.9, b = 0, a = 1 }
 				},
 				stack = {
 					position = "BOTTOMRIGHT",
 					xOffset = 0,
 					yOffset = 2,
-					color = {r = 1, g = 0.9, b = 0, a = 1}
+					color = { r = 1, g = 0.9, b = 0, a = 1 }
 				}
 			},
 			roleIcon = {
@@ -3579,13 +3600,13 @@ P.unitframe = {
 					position = "CENTER",
 					xOffset = 0,
 					yOffset = 0,
-					color = {r = 1, g = 0.9, b = 0, a = 1}
+					color = { r = 1, g = 0.9, b = 0, a = 1 }
 				},
 				stack = {
 					position = "BOTTOMRIGHT",
 					xOffset = 0,
 					yOffset = 2,
-					color = {r = 1, g = 0.9, b = 0, a = 1}
+					color = { r = 1, g = 0.9, b = 0, a = 1 }
 				}
 			},
 			raidRoleIcons = {
@@ -3767,13 +3788,13 @@ P.unitframe = {
 					position = "CENTER",
 					xOffset = 0,
 					yOffset = 0,
-					color = {r = 1, g = 0.9, b = 0, a = 1}
+					color = { r = 1, g = 0.9, b = 0, a = 1 }
 				},
 				stack = {
 					position = "BOTTOMRIGHT",
 					xOffset = 0,
 					yOffset = 2,
-					color = {r = 1, g = 0.9, b = 0, a = 1}
+					color = { r = 1, g = 0.9, b = 0, a = 1 }
 				}
 			},
 			raidicon = {
@@ -3891,13 +3912,13 @@ P.unitframe = {
 					position = "CENTER",
 					xOffset = 0,
 					yOffset = 0,
-					color = {r = 1, g = 0.9, b = 0, a = 1}
+					color = { r = 1, g = 0.9, b = 0, a = 1 }
 				},
 				stack = {
 					position = "BOTTOMRIGHT",
 					xOffset = 0,
 					yOffset = 2,
-					color = {r = 1, g = 0.9, b = 0, a = 1}
+					color = { r = 1, g = 0.9, b = 0, a = 1 }
 				}
 			},
 			raidicon = {
@@ -4039,13 +4060,13 @@ P.unitframe = {
 					position = "CENTER",
 					xOffset = 0,
 					yOffset = 0,
-					color = {r = 1, g = 0.9, b = 0, a = 1}
+					color = { r = 1, g = 0.9, b = 0, a = 1 }
 				},
 				stack = {
 					position = "BOTTOMRIGHT",
 					xOffset = 0,
 					yOffset = 2,
-					color = {r = 1, g = 0.9, b = 0, a = 1}
+					color = { r = 1, g = 0.9, b = 0, a = 1 }
 				}
 			},
 			raidicon = {
@@ -4102,22 +4123,22 @@ P.unitframe = {
 P.cooldown = {
 	enable = true,
 	threshold = 3,
-	expiringColor = {r = 1, g = 0, b = 0},
-	secondsColor = {r = 1, g = 1, b = 0},
-	minutesColor = {r = 1, g = 1, b = 1},
-	hoursColor = {r = 0.4, g = 1, b = 1},
-	daysColor = {r = 0.4, g = 0.4, b = 1},
-	expireIndicator = {r = 1, g = 1, b = 1},
-	secondsIndicator = {r = 1, g = 1, b = 1},
-	minutesIndicator = {r = 1, g = 1, b = 1},
-	hoursIndicator = {r = 1, g = 1, b = 1},
-	daysIndicator = {r = 1, g = 1, b = 1},
-	hhmmColorIndicator = {r = 1, g = 1, b = 1},
-	mmssColorIndicator = {r = 1, g = 1, b = 1},
+	expiringColor = { r = 1, g = 0, b = 0 },
+	secondsColor = { r = 1, g = 1, b = 0 },
+	minutesColor = { r = 1, g = 1, b = 1 },
+	hoursColor = { r = 0.4, g = 1, b = 1 },
+	daysColor = { r = 0.4, g = 0.4, b = 1 },
+	expireIndicator = { r = 1, g = 1, b = 1 },
+	secondsIndicator = { r = 1, g = 1, b = 1 },
+	minutesIndicator = { r = 1, g = 1, b = 1 },
+	hoursIndicator = { r = 1, g = 1, b = 1 },
+	daysIndicator = { r = 1, g = 1, b = 1 },
+	hhmmColorIndicator = { r = 1, g = 1, b = 1 },
+	mmssColorIndicator = { r = 1, g = 1, b = 1 },
 
 	checkSeconds = false,
-	hhmmColor = {r = 0.43, g = 0.43, b = 0.43},
-	mmssColor = {r = 0.56, g = 0.56, b = 0.56},
+	hhmmColor = { r = 0.43, g = 0.43, b = 0.43 },
+	mmssColor = { r = 0.56, g = 0.56, b = 0.56 },
 	hhmmThreshold = -1,
 	mmssThreshold = -1,
 
@@ -4134,7 +4155,7 @@ P.actionbar = {
 	font = "Homespun",
 	fontSize = 10,
 	fontOutline = "MONOCHROMEOUTLINE",
-	fontColor = {r = 1, g = 1, b = 1},
+	fontColor = { r = 1, g = 1, b = 1 },
 
 	macrotext = false,
 	hotkeytext = true,
@@ -4157,33 +4178,33 @@ P.actionbar = {
 	desaturateOnCooldown = false,
 
 	equippedItem = false,
-	equippedItemColor = {r = 0.4, g = 1.0, b = 0.4},
+	equippedItemColor = { r = 0.4, g = 1.0, b = 0.4 },
 
 	useRangeColorText = false,
-	noRangeColor = {r = 0.8, g = 0.1, b = 0.1},
-	noPowerColor = {r = 0.5, g = 0.5, b = 1},
-	usableColor = {r = 1, g = 1, b = 1},
-	notUsableColor = {r = 0.4, g = 0.4, b = 0.4},
+	noRangeColor = { r = 0.8, g = 0.1, b = 0.1 },
+	noPowerColor = { r = 0.5, g = 0.5, b = 1 },
+	usableColor = { r = 1, g = 1, b = 1 },
+	notUsableColor = { r = 0.4, g = 0.4, b = 0.4 },
 
 	cooldown = {
 		override = true,
 		threshold = 3,
-		expiringColor = {r = 1, g = 0, b = 0},
-		secondsColor = {r = 1, g = 1, b = 1},
-		minutesColor = {r = 1, g = 1, b = 1},
-		hoursColor = {r = 1, g = 1, b = 1},
-		daysColor = {r = 1, g = 1, b = 1},
-		expireIndicator = {r = 1, g = 1, b = 1},
-		secondsIndicator = {r = 1, g = 1, b = 1},
-		minutesIndicator = {r = 1, g = 1, b = 1},
-		hoursIndicator = {r = 1, g = 1, b = 1},
-		daysIndicator = {r = 1, g = 1, b = 1},
-		hhmmColorIndicator = {r = 1, g = 1, b = 1},
-		mmssColorIndicator = {r = 1, g = 1, b = 1},
+		expiringColor = { r = 1, g = 0, b = 0 },
+		secondsColor = { r = 1, g = 1, b = 1 },
+		minutesColor = { r = 1, g = 1, b = 1 },
+		hoursColor = { r = 1, g = 1, b = 1 },
+		daysColor = { r = 1, g = 1, b = 1 },
+		expireIndicator = { r = 1, g = 1, b = 1 },
+		secondsIndicator = { r = 1, g = 1, b = 1 },
+		minutesIndicator = { r = 1, g = 1, b = 1 },
+		hoursIndicator = { r = 1, g = 1, b = 1 },
+		daysIndicator = { r = 1, g = 1, b = 1 },
+		hhmmColorIndicator = { r = 1, g = 1, b = 1 },
+		mmssColorIndicator = { r = 1, g = 1, b = 1 },
 
 		checkSeconds = false,
-		hhmmColor = {r = 0.43, g = 0.43, b = 0.43},
-		mmssColor = {r = 0.56, g = 0.56, b = 0.56},
+		hhmmColor = { r = 0.43, g = 0.43, b = 0.43 },
+		mmssColor = { r = 0.56, g = 0.56, b = 0.56 },
 		hhmmThreshold = -1,
 		mmssThreshold = -1,
 

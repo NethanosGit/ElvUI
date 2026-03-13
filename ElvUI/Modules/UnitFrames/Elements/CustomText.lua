@@ -30,10 +30,12 @@ function UF:Configure_CustomTexts(frame)
 			end
 
 			local attachPoint = self:GetObjectAnchorPoint(frame, objectDB.attachTextTo)
-			frame.customTexts[objectName]:FontTemplate(customFont, objectDB.size or UF.db.fontSize, objectDB.fontOutline or UF.db.fontOutline)
+			frame.customTexts[objectName]:FontTemplate(customFont, objectDB.size or UF.db.fontSize,
+				objectDB.fontOutline or UF.db.fontOutline)
 			frame.customTexts[objectName]:SetJustifyH(objectDB.justifyH or "CENTER")
 			frame.customTexts[objectName]:ClearAllPoints()
-			frame.customTexts[objectName]:Point(objectDB.justifyH or "CENTER", attachPoint, objectDB.justifyH or "CENTER", objectDB.xOffset, objectDB.yOffset)
+			frame.customTexts[objectName]:Point(objectDB.justifyH or "CENTER", attachPoint, objectDB.justifyH or "CENTER",
+				objectDB.xOffset, objectDB.yOffset)
 
 			--This takes care of custom texts that were added before the enable option was added.
 			if objectDB.enable == nil then

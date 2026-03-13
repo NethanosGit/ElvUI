@@ -36,7 +36,7 @@ local UIHider
 
 AB.RegisterCooldown = E.RegisterCooldown
 
-AB.handledBars = {} --List of all bars
+AB.handledBars = {}    --List of all bars
 AB.handledbuttons = {} --List of all buttons that have been modified.
 AB.barDefaults = {
 	bar1 = {
@@ -105,7 +105,7 @@ function AB:PositionAndSizeBar(barName)
 	bar.db = self.db[barName]
 
 	if visibility and match(visibility, "[\n\r]") then
-		visibility = gsub(visibility, "[\n\r]","")
+		visibility = gsub(visibility, "[\n\r]", "")
 	end
 
 	if numButtons < buttonsPerRow then
@@ -127,8 +127,10 @@ function AB:PositionAndSizeBar(barName)
 
 	local sideSpacing = (bar.db.backdrop == true and (E.Border + backdropSpacing) or E.Spacing)
 	--Size of all buttons + Spacing between all buttons + Spacing between additional rows of buttons + Spacing between backdrop and buttons + Spacing on end borders with non-thin borders
-	local barWidth = (size * (buttonsPerRow * widthMult)) + ((buttonSpacing * (buttonsPerRow - 1)) * widthMult) + (buttonSpacing * (widthMult - 1)) + (sideSpacing*2)
-	local barHeight = (size * (numColumns * heightMult)) + ((buttonSpacing * (numColumns - 1)) * heightMult) + (buttonSpacing * (heightMult - 1)) + (sideSpacing*2)
+	local barWidth = (size * (buttonsPerRow * widthMult)) + ((buttonSpacing * (buttonsPerRow - 1)) * widthMult) +
+		(buttonSpacing * (widthMult - 1)) + (sideSpacing * 2)
+	local barHeight = (size * (numColumns * heightMult)) + ((buttonSpacing * (numColumns - 1)) * heightMult) +
+		(buttonSpacing * (heightMult - 1)) + (sideSpacing * 2)
 	bar:Width(barWidth)
 	bar:Height(barHeight)
 
@@ -163,10 +165,26 @@ function AB:PositionAndSizeBar(barName)
 	for i = 1, NUM_ACTIONBAR_BUTTONS do
 		button = bar.buttons[i]
 		lastButton = bar.buttons[i - 1]
-		lastColumnButton = bar.buttons[i-buttonsPerRow]
+		lastColumnButton = bar.buttons[i - buttonsPerRow]
 		button:SetParent(bar)
 		button:ClearAllPoints()
-		button:Size(size, size*0.72)
+		button:Size(size, size * 0.72)
+		-- ToxiUI added shadow for frames
+		local edgeSize, shadowSize, shadowAlpha = 0.5, 3, 1;
+		local softShadow = button.txSoftShadow or CreateFrame("Frame", "Shadow", button)
+		softShadow:SetFrameLevel(button:GetFrameLevel())
+		softShadow:SetFrameStrata(button:GetFrameStrata())
+		softShadow:SetOutside(button, (shadowSize - edgeSize) or edgeSize, (shadowSize - edgeSize) or edgeSize)
+		softShadow:SetBackdrop {
+			edgeFile = E.Media.Textures.GlowTex,
+			edgeSize = E:Scale(shadowSize),
+		}
+		softShadow:SetBackdropColor(0, 0, 0, 0)
+		softShadow:SetBackdropBorderColor(0, 0, 0, shadowAlpha)
+		softShadow:Show()
+
+		button.txSoftShadow = softShadow
+		-- ToxiUI end
 		button:SetAttribute("showgrid", 1)
 		if i == 1 then
 			local x, y
@@ -210,7 +228,6 @@ function AB:PositionAndSizeBar(barName)
 
 		self:StyleButton(button, nil, (self.LBFGroup or self.MSQGroup) and E.private.actionbar.lbf.enable and true or nil)
 		button.icon:SetTexCoord(0.07, 0.93, 0.2, 0.8)
-
 	end
 
 	if bar.db.enabled or not bar.initialized then
@@ -236,7 +253,7 @@ function AB:PositionAndSizeBar(barName)
 		UnregisterStateDriver(bar, "visibility")
 	end
 
-	E:SetMoverSnapOffset("ElvAB_"..bar.id, bar.db.buttonspacing / 2)
+	E:SetMoverSnapOffset("ElvAB_" .. bar.id, bar.db.buttonspacing / 2)
 
 	if self.LBFGroup and E.private.actionbar.lbf.enable then
 		self.LBFGroup:Skin(E.private.actionbar.lbf.skin)
@@ -246,8 +263,8 @@ function AB:PositionAndSizeBar(barName)
 end
 
 function AB:CreateBar(id)
-	local bar = CreateFrame("Frame", "ElvUI_Bar"..id, E.UIParent, "SecureHandlerStateTemplate")
-	local point, anchor, attachTo, x, y = split(",", self.barDefaults["bar"..id].position)
+	local bar = CreateFrame("Frame", "ElvUI_Bar" .. id, E.UIParent, "SecureHandlerStateTemplate")
+	local point, anchor, attachTo, x, y = split(",", self.barDefaults["bar" .. id].position)
 	bar:Point(point, anchor, attachTo, x, y)
 	bar.id = id
 	bar:CreateBackdrop(self.db.transparentBackdrops and "Transparent")
@@ -258,12 +275,12 @@ function AB:CreateBar(id)
 	bar.backdrop:SetPoint("BOTTOMRIGHT", bar, "BOTTOMRIGHT", -E.Spacing, E.Spacing)
 
 	bar.buttons = {}
-	bar.bindButtons = self.barDefaults["bar"..id].bindButtons
+	bar.bindButtons = self.barDefaults["bar" .. id].bindButtons
 	self:HookScript(bar, "OnEnter", "Bar_OnEnter")
 	self:HookScript(bar, "OnLeave", "Bar_OnLeave")
 
 	for i = 1, 12 do
-		bar.buttons[i] = LAB:CreateButton(i, format(bar:GetName().."Button%d", i), bar, nil)
+		bar.buttons[i] = LAB:CreateButton(i, format(bar:GetName() .. "Button%d", i), bar, nil)
 		bar.buttons[i]:SetState(0, "action", i)
 		for k = 1, 11 do
 			bar.buttons[i]:SetState(k, "action", (k - 1) * 12 + i)
@@ -296,9 +313,9 @@ function AB:CreateBar(id)
 		end
 	]])
 
-	self.handledBars["bar"..id] = bar
-	E:CreateMover(bar, "ElvAB_"..id, L["Bar "]..id, nil, nil, nil,"ALL,ACTIONBARS",nil,"actionbar,bar"..id)
-	self:PositionAndSizeBar("bar"..id)
+	self.handledBars["bar" .. id] = bar
+	E:CreateMover(bar, "ElvAB_" .. id, L["Bar "] .. id, nil, nil, nil, "ALL,ACTIONBARS", nil, "actionbar,bar" .. id)
+	self:PositionAndSizeBar("bar" .. id)
 	return bar
 end
 
@@ -341,7 +358,8 @@ function AB:UpdateVehicleLeave()
 	local pos = E.db.general.minimap.icons.vehicleLeave.position
 
 	self.vehicle:ClearAllPoints()
-	self.vehicle:Point(pos, Minimap, pos, E.db.general.minimap.icons.vehicleLeave.xOffset, E.db.general.minimap.icons.vehicleLeave.yOffset)
+	self.vehicle:Point(pos, Minimap, pos, E.db.general.minimap.icons.vehicleLeave.xOffset,
+		E.db.general.minimap.icons.vehicleLeave.yOffset)
 	self.vehicle:Size(26 * E.db.general.minimap.icons.vehicleLeave.scale)
 
 	Vehicle_OnEvent(self.vehicle)
@@ -389,8 +407,8 @@ function AB:ReassignBindings(event)
 		if bar then
 			ClearOverrideBindings(bar)
 			for i = 1, #bar.buttons do
-				local button = format(bar.bindButtons.."%d", i)
-				local real_button = format(bar:GetName().."Button%d", i)
+				local button = format(bar.bindButtons .. "%d", i)
+				local real_button = format(bar:GetName() .. "Button%d", i)
 				for k = 1, select("#", GetBindingKey(button)) do
 					local key = select(k, GetBindingKey(button))
 					if key and key ~= "" then
@@ -505,28 +523,28 @@ function AB:GetPage(bar, defaultPage, condition)
 	if not page then
 		page = ""
 	elseif match(page, "[\n\r]") then
-		page = gsub(page, "[\n\r]","")
+		page = gsub(page, "[\n\r]", "")
 	end
 
 	if page then
-		condition = condition.." "..page
+		condition = condition .. " " .. page
 	end
-	condition = condition.." "..defaultPage
+	condition = condition .. " " .. defaultPage
 
 	return condition
 end
 
 function AB:StyleButton(button, noBackdrop, useMasque)
 	local name = button:GetName()
-	local icon = _G[name.."Icon"]
-	local count = _G[name.."Count"]
-	local flash = _G[name.."Flash"]
-	local hotkey = _G[name.."HotKey"]
-	local border = _G[name.."Border"]
-	local macroText = _G[name.."Name"]
-	local normal = _G[name.."NormalTexture"]
+	local icon = _G[name .. "Icon"]
+	local count = _G[name .. "Count"]
+	local flash = _G[name .. "Flash"]
+	local hotkey = _G[name .. "HotKey"]
+	local border = _G[name .. "Border"]
+	local macroText = _G[name .. "Name"]
+	local normal = _G[name .. "NormalTexture"]
 	local normal2 = button:GetNormalTexture()
-	local buttonCooldown = _G[name.."Cooldown"]
+	local buttonCooldown = _G[name .. "Cooldown"]
 
 	local color = self.db.fontColor
 	local countPosition = self.db.countTextPosition or "BOTTOMRIGHT"
@@ -537,8 +555,16 @@ function AB:StyleButton(button, noBackdrop, useMasque)
 	button.useMasque = useMasque
 
 	if flash then flash:SetTexture(nil) end
-	if normal then normal:SetTexture(nil) normal:Hide() normal:SetAlpha(0) end
-	if normal2 then normal2:SetTexture(nil) normal2:Hide() normal2:SetAlpha(0) end
+	if normal then
+		normal:SetTexture(nil)
+		normal:Hide()
+		normal:SetAlpha(0)
+	end
+	if normal2 then
+		normal2:SetTexture(nil)
+		normal2:Hide()
+		normal2:SetAlpha(0)
+	end
 	if border and not button.useMasque then border:Kill() end
 
 	if count then
@@ -658,10 +684,12 @@ end
 
 function AB:FadeParent_OnEvent(event, unit)
 	if (event == "UNIT_SPELLCAST_START"
-	or event == "UNIT_SPELLCAST_STOP"
-	or event == "UNIT_SPELLCAST_CHANNEL_START"
-	or event == "UNIT_SPELLCAST_CHANNEL_STOP"
-	or event == "UNIT_HEALTH") and unit ~= "player" then return end
+			or event == "UNIT_SPELLCAST_STOP"
+			or event == "UNIT_SPELLCAST_CHANNEL_START"
+			or event == "UNIT_SPELLCAST_CHANNEL_STOP"
+			or event == "UNIT_HEALTH") and unit ~= "player" then
+		return
+	end
 
 	local cur, max = UnitHealth("player"), UnitHealthMax("player")
 	local cast, channel = UnitCastingInfo("player"), UnitChannelInfo("player")
@@ -695,40 +723,40 @@ function AB:DisableBlizzard()
 
 	-- Hide MultiBar Buttons, but keep the bars alive
 	for i = 1, 12 do
-		_G["ActionButton"..i]:Hide()
-		_G["ActionButton"..i]:UnregisterAllEvents()
-		_G["ActionButton"..i]:SetAttribute("statehidden", true)
+		_G["ActionButton" .. i]:Hide()
+		_G["ActionButton" .. i]:UnregisterAllEvents()
+		_G["ActionButton" .. i]:SetAttribute("statehidden", true)
 
-		_G["MultiBarBottomLeftButton"..i]:Hide()
-		_G["MultiBarBottomLeftButton"..i]:UnregisterAllEvents()
-		_G["MultiBarBottomLeftButton"..i]:SetAttribute("statehidden", true)
+		_G["MultiBarBottomLeftButton" .. i]:Hide()
+		_G["MultiBarBottomLeftButton" .. i]:UnregisterAllEvents()
+		_G["MultiBarBottomLeftButton" .. i]:SetAttribute("statehidden", true)
 
-		_G["MultiBarBottomRightButton"..i]:Hide()
-		_G["MultiBarBottomRightButton"..i]:UnregisterAllEvents()
-		_G["MultiBarBottomRightButton"..i]:SetAttribute("statehidden", true)
+		_G["MultiBarBottomRightButton" .. i]:Hide()
+		_G["MultiBarBottomRightButton" .. i]:UnregisterAllEvents()
+		_G["MultiBarBottomRightButton" .. i]:SetAttribute("statehidden", true)
 
-		_G["MultiBarRightButton"..i]:Hide()
-		_G["MultiBarRightButton"..i]:UnregisterAllEvents()
-		_G["MultiBarRightButton"..i]:SetAttribute("statehidden", true)
+		_G["MultiBarRightButton" .. i]:Hide()
+		_G["MultiBarRightButton" .. i]:UnregisterAllEvents()
+		_G["MultiBarRightButton" .. i]:SetAttribute("statehidden", true)
 
-		_G["MultiBarLeftButton"..i]:Hide()
-		_G["MultiBarLeftButton"..i]:UnregisterAllEvents()
-		_G["MultiBarLeftButton"..i]:SetAttribute("statehidden", true)
+		_G["MultiBarLeftButton" .. i]:Hide()
+		_G["MultiBarLeftButton" .. i]:UnregisterAllEvents()
+		_G["MultiBarLeftButton" .. i]:SetAttribute("statehidden", true)
 
-		if _G["VehicleMenuBarActionButton"..i] then
-			_G["VehicleMenuBarActionButton"..i]:Hide()
-			_G["VehicleMenuBarActionButton"..i]:UnregisterAllEvents()
-			_G["VehicleMenuBarActionButton"..i]:SetAttribute("statehidden", true)
+		if _G["VehicleMenuBarActionButton" .. i] then
+			_G["VehicleMenuBarActionButton" .. i]:Hide()
+			_G["VehicleMenuBarActionButton" .. i]:UnregisterAllEvents()
+			_G["VehicleMenuBarActionButton" .. i]:SetAttribute("statehidden", true)
 		end
 
-		_G["BonusActionButton"..i]:Hide()
-		_G["BonusActionButton"..i]:UnregisterAllEvents()
-		_G["BonusActionButton"..i]:SetAttribute("statehidden", true)
+		_G["BonusActionButton" .. i]:Hide()
+		_G["BonusActionButton" .. i]:UnregisterAllEvents()
+		_G["BonusActionButton" .. i]:SetAttribute("statehidden", true)
 
 		if E.myclass ~= "SHAMAN" then
-			_G["MultiCastActionButton"..i]:Hide()
-			_G["MultiCastActionButton"..i]:UnregisterAllEvents()
-			_G["MultiCastActionButton"..i]:SetAttribute("statehidden", true)
+			_G["MultiCastActionButton" .. i]:Hide()
+			_G["MultiCastActionButton" .. i]:UnregisterAllEvents()
+			_G["MultiCastActionButton" .. i]:SetAttribute("statehidden", true)
 		end
 	end
 
@@ -791,7 +819,8 @@ function AB:DisableBlizzard()
 	if PlayerTalentFrame then
 		PlayerTalentFrame:UnregisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 	else
-		hooksecurefunc("TalentFrame_LoadUI", function() PlayerTalentFrame:UnregisterEvent("ACTIVE_TALENT_GROUP_CHANGED") end)
+		hooksecurefunc("TalentFrame_LoadUI",
+			function() PlayerTalentFrame:UnregisterEvent("ACTIVE_TALENT_GROUP_CHANGED") end)
 	end
 end
 
@@ -802,10 +831,10 @@ function AB:UpdateButtonConfig(bar, buttonName)
 		return
 	end
 
-	if not bar.buttonConfig then bar.buttonConfig = {hideElements = {}, colors = {}} end
+	if not bar.buttonConfig then bar.buttonConfig = { hideElements = {}, colors = {} } end
 	bar.buttonConfig.hideElements.macro = not self.db.macrotext
 	bar.buttonConfig.hideElements.hotkey = not self.db.hotkeytext
-	bar.buttonConfig.showGrid = self.db["bar"..bar.id].showGrid
+	bar.buttonConfig.showGrid = self.db["bar" .. bar.id].showGrid
 	bar.buttonConfig.clickOnDown = self.db.keyDown
 	bar.buttonConfig.outOfRangeColoring = (self.db.useRangeColorText and "hotkey") or "button"
 	SetModifiedClick("PICKUPACTION", self.db.movementModifier)
@@ -815,7 +844,7 @@ function AB:UpdateButtonConfig(bar, buttonName)
 	bar.buttonConfig.colors.notUsable = E:SetColorTable(bar.buttonConfig.colors.notUsable, self.db.notUsableColor)
 
 	for i, button in pairs(bar.buttons) do
-		bar.buttonConfig.keyBoundTarget = format(buttonName.."%d", i)
+		bar.buttonConfig.keyBoundTarget = format(buttonName .. "%d", i)
 		button.keyBoundTarget = bar.buttonConfig.keyBoundTarget
 		button.postKeybind = AB.FixKeybindText
 		button:SetAttribute("buttonlock", self.db.lockActionBars)
@@ -832,7 +861,7 @@ function AB:UpdateButtonConfig(bar, buttonName)
 end
 
 function AB:FixKeybindText(button)
-	local hotkey = _G[button:GetName().."HotKey"]
+	local hotkey = _G[button:GetName() .. "HotKey"]
 	local text = hotkey:GetText()
 
 	local hotkeyPosition = E.db.actionbar.hotkeyTextPosition or "TOPRIGHT"
@@ -897,6 +926,7 @@ function AB:LAB_ButtonUpdate(button)
 		end
 	end
 end
+
 LAB.RegisterCallback(AB, "OnButtonUpdate", AB.LAB_ButtonUpdate)
 
 local function OnCooldownUpdate(_, button, start, duration)

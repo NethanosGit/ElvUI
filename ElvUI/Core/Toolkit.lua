@@ -92,8 +92,10 @@ local function SetTemplate(frame, template, glossTex, ignoreUpdates, forcePixelM
 		frame:SetBackdrop({
 			bgFile = bgFile,
 			edgeFile = E.media.blankTex,
-			tile = false, tileSize = 0, edgeSize = E.mult,
-			insets = {left = 0, right = 0, top = 0, bottom = 0}
+			tile = false,
+			tileSize = 0,
+			edgeSize = E.mult,
+			insets = { left = 0, right = 0, top = 0, bottom = 0 }
 		})
 
 		frame:SetBackdropColor(backdropr, backdropg, backdropb, backdropa)
@@ -105,7 +107,7 @@ local function SetTemplate(frame, template, glossTex, ignoreUpdates, forcePixelM
 				border:SetBackdrop({
 					edgeFile = E.media.blankTex,
 					edgeSize = E.mult,
-					insets = {left = -E.mult, right = -E.mult, top = -E.mult, bottom = -E.mult}
+					insets = { left = -E.mult, right = -E.mult, top = -E.mult, bottom = -E.mult }
 				})
 				border:SetBackdropBorderColor(0, 0, 0, 1)
 				frame.iborder = border
@@ -118,7 +120,7 @@ local function SetTemplate(frame, template, glossTex, ignoreUpdates, forcePixelM
 				border:SetBackdrop({
 					edgeFile = E.media.blankTex,
 					edgeSize = E.mult,
-					insets = {left = E.mult, right = E.mult, top = E.mult, bottom = E.mult}
+					insets = { left = E.mult, right = E.mult, top = E.mult, bottom = E.mult }
 				})
 				border:SetBackdropBorderColor(0, 0, 0, 1)
 				frame.oborder = border
@@ -171,7 +173,7 @@ local function CreateShadow(frame, size)
 	shadow:SetFrameLevel(1)
 	shadow:SetFrameStrata(frame:GetFrameStrata())
 	shadow:SetOutside(frame, size or 3, size or 3)
-	shadow:SetBackdrop({edgeFile = LSM:Fetch("border", "ElvUI GlowBorder"), edgeSize = E:Scale(size or 3)})
+	shadow:SetBackdrop({ edgeFile = LSM:Fetch("border", "ElvUI GlowBorder"), edgeSize = E:Scale(size or 3) })
 	shadow:SetBackdropColor(backdropr, backdropg, backdropb, backdropa)
 	shadow:SetBackdropBorderColor(borderr, borderg, borderb, 0.9)
 	frame.shadow = shadow
@@ -216,28 +218,23 @@ local function StripTextures(object, kill, alpha)
 end
 
 local function FontTemplate(fs, font, fontSize, fontStyle)
-	fs.font = font
-	fs.fontSize = fontSize
-	fs.fontStyle = fontStyle
+	fs.font, fs.fontSize, fs.fontStyle = font, fontSize, fontStyle
 
-	font = font or LSM:Fetch("font", E.db.general.font)
-	fontSize = fontSize or E.db.general.fontSize
-	fontStyle = fontStyle or E.db.general.fontStyle
+	font                               = font or LSM:Fetch("font", E.db.general.font)
+	fontSize                           = fontSize or E.db.general.fontSize
+	fontStyle                          = fontStyle or E.db.general.fontStyle
+
+	local shadow                       = strsub(fontStyle, 0, 6) == 'SHADOW'
+	if shadow then fontStyle = strsub(fontStyle, 7) end -- shadow isnt a real style
 
 	if fontStyle == "OUTLINE" and E.db.general.font == "Homespun" and (fontSize > 10 and not fs.fontSize) then
 		fontSize, fontStyle = 10, "MONOCHROMEOUTLINE"
 	end
 
-	fs:SetFont(font, fontSize, fontStyle)
+	fs:SetShadowColor(0, 0, 0, (shadow and (fontStyle == '' and 1 or 0.6)) or 0)
+	fs:SetShadowOffset((shadow and 1) or 0, (shadow and -1) or 0)
 
-	if fontStyle == "NONE" then
-		local s = E.mult or 1
-		fs:SetShadowOffset(s, -s/2)
-		fs:SetShadowColor(0, 0, 0, 1)
-	else
-		fs:SetShadowOffset(0, 0)
-		fs:SetShadowColor(0, 0, 0, 0)
-	end
+	fs:SetFont(font, fontSize, fontStyle)
 
 	E.texts[fs] = true
 end
@@ -268,7 +265,7 @@ local function StyleButton(button, noHover, noPushed, noChecked)
 	end
 
 	local name = button.GetName and button:GetName()
-	local cooldown = name and _G[name.."Cooldown"]
+	local cooldown = name and _G[name .. "Cooldown"]
 	if cooldown then
 		cooldown:ClearAllPoints()
 		cooldown:SetInside()
@@ -303,7 +300,7 @@ end
 local function GetNamedChild(frame, childName, index)
 	local name = frame and frame.GetName and frame:GetName()
 	if not name or not childName then return nil end
-	return _G[name..childName..(index or "")]
+	return _G[name .. childName .. (index or "")]
 end
 
 local function addapi(object)
@@ -325,7 +322,7 @@ local function addapi(object)
 	if not object.GetNamedChild then mt.GetNamedChild = GetNamedChild end
 end
 
-local handled = {["Frame"] = true}
+local handled = { ["Frame"] = true }
 local object = CreateFrame("Frame")
 addapi(object)
 addapi(object:CreateTexture())

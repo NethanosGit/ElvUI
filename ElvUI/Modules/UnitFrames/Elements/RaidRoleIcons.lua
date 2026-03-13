@@ -53,9 +53,14 @@ function UF:Construct_RaidRoleFrames(frame)
 	frame.MasterLooterIndicator = anchor:CreateTexture(nil, "OVERLAY")
 
 	anchor:Size(24, 12)
-	frame.LeaderIndicator:Size(12)
-	frame.AssistantIndicator:Size(12)
-	frame.MasterLooterIndicator:Size(11)
+	frame.LeaderIndicator:SetTexture([[Interface\Addons\ElvUI_ToxiUI\Media\Textures\State\StylizedLeader.blp]])
+	frame.LeaderIndicator:Size(20)
+
+	frame.AssistantIndicator:SetTexture([[Interface\Addons\ElvUI_ToxiUI\Media\Textures\State\StylizedMainAssist.blp]])
+	frame.AssistantIndicator:Size(20)
+
+	frame.MasterLooterIndicator:SetTexture([[Interface\Addons\ElvUI_ToxiUI\Media\Textures\State\StylizedLooter.blp]])
+	frame.MasterLooterIndicator:Size(20)
 
 	frame.LeaderIndicator.Override = UpdateOverride
 
@@ -79,9 +84,9 @@ function UF:Configure_RaidRoleIcons(frame)
 
 		raidRoleFrameAnchor:ClearAllPoints()
 		if frame.db.raidRoleIcons.position == "TOPLEFT" then
-			raidRoleFrameAnchor:Point("LEFT", frame.Health, "TOPLEFT", 2, 0)
+			raidRoleFrameAnchor:Point("LEFT", frame.Health, "TOPLEFT", 6, 28)
 		else
-			raidRoleFrameAnchor:Point("RIGHT", frame, "TOPRIGHT", -2, 0)
+			raidRoleFrameAnchor:Point("RIGHT", frame, "TOPRIGHT", -6, 28)
 		end
 	elseif frame:IsElementEnabled("LeaderIndicator") then
 		raidRoleFrameAnchor:Hide()

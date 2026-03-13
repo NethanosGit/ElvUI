@@ -3,6 +3,7 @@ local UF = E:GetModule("UnitFrames")
 local LSM = E.Libs.LSM
 UF.LSM = E.Libs.LSM
 
+
 --Lua functions
 local _G = _G
 local select, pairs, type, unpack, assert, tostring = select, pairs, type, unpack, assert, tostring
@@ -184,7 +185,7 @@ local DIRECTION_TO_VERTICAL_SPACING_MULTIPLIER = {
 function UF:ConvertGroupDB(group)
 	local db = self.db.units[group.groupName]
 	if db.point and db.columnAnchorPoint then
-		db.growthDirection = POINT_COLUMN_ANCHOR_TO_DIRECTION[db.point..db.columnAnchorPoint]
+		db.growthDirection = POINT_COLUMN_ANCHOR_TO_DIRECTION[db.point .. db.columnAnchorPoint]
 		db.point = nil
 		db.columnAnchorPoint = nil
 	end
@@ -214,6 +215,23 @@ function UF:Construct_UF(frame, unit)
 	frame.CLASSBAR_YOFFSET = 0 --placeholder
 	frame.BOTTOM_OFFSET = 0 --placeholder
 
+	-- ToxiUI added shadow for frames
+	local edgeSize, shadowSize, shadowAlpha = 1, 3, 1;
+	local softShadow = frame.txSoftShadow or CreateFrame("Frame", "Shadow", frame)
+	softShadow:SetFrameLevel(frame:GetFrameLevel())
+	softShadow:SetFrameStrata(frame:GetFrameStrata())
+	softShadow:SetOutside(frame, (shadowSize - edgeSize) or edgeSize, (shadowSize - edgeSize) or edgeSize)
+	softShadow:SetBackdrop {
+		edgeFile = E.Media.Textures.GlowTex,
+		edgeSize = E:Scale(shadowSize),
+	}
+	softShadow:SetBackdropColor(0, 0, 0, 0)
+	softShadow:SetBackdropBorderColor(0, 0, 0, shadowAlpha)
+	softShadow:Show()
+
+	frame.txSoftShadow = softShadow
+	-- ToxiUI end
+
 	frame.RaisedElementParent = CreateFrame("Frame", nil, frame)
 	frame.RaisedElementParent.TextureParent = CreateFrame("Frame", nil, frame.RaisedElementParent)
 	frame.RaisedElementParent:SetFrameLevel(frame:GetFrameLevel() + 125)
@@ -223,9 +241,9 @@ function UF:Construct_UF(frame, unit)
 		if find(stringTitle, "target") then
 			stringTitle = gsub(stringTitle, "target", "Target")
 		end
-		self["Construct_"..stringTitle.."Frame"](self, frame, unit)
+		self["Construct_" .. stringTitle .. "Frame"](self, frame, unit)
 	else
-		UF["Construct_"..E:StringTitle(self.groupunits[unit]).."Frames"](self, frame, unit)
+		UF["Construct_" .. E:StringTitle(self.groupunits[unit]) .. "Frames"](self, frame, unit)
 	end
 
 	self:Update_StatusBars()
@@ -281,7 +299,10 @@ end
 
 function UF:GetAuraAnchorFrame(frame, attachTo, isConflict)
 	if isConflict then
-		E:Print(format(L["%s frame(s) has a conflicting anchor point, please change either the buff or debuff anchor point so they are not attached to each other. Forcing the debuffs to be attached to the main unitframe until fixed."], E:StringTitle(frame:GetName())))
+		E:Print(format(
+			L
+			["%s frame(s) has a conflicting anchor point, please change either the buff or debuff anchor point so they are not attached to each other. Forcing the debuffs to be attached to the main unitframe until fixed."],
+			E:StringTitle(frame:GetName())))
 	end
 
 	if isConflict or attachTo == "FRAME" then
@@ -354,7 +375,7 @@ function UF:UpdateColors()
 	if not ElvUF.colors.smoothHealth then ElvUF.colors.smoothHealth = {} end
 	ElvUF.colors.smoothHealth = E:SetColorTable(ElvUF.colors.smoothHealth, db.health)
 
-	if not ElvUF.colors.smooth then ElvUF.colors.smooth = {1, 0, 0,	1, 1, 0} end
+	if not ElvUF.colors.smooth then ElvUF.colors.smooth = { 1, 0, 0, 1, 1, 0 } end
 
 	ElvUF.colors.reaction[1] = ElvUF.colors.reaction.bad
 	ElvUF.colors.reaction[2] = ElvUF.colors.reaction.bad
@@ -374,7 +395,8 @@ function UF:UpdateColors()
 	if not ElvUF.colors.DebuffHighlight then ElvUF.colors.DebuffHighlight = {} end
 	ElvUF.colors.DebuffHighlight.Magic = E:SetColorTable(ElvUF.colors.DebuffHighlight.Magic, db.debuffHighlight.Magic)
 	ElvUF.colors.DebuffHighlight.Curse = E:SetColorTable(ElvUF.colors.DebuffHighlight.Curse, db.debuffHighlight.Curse)
-	ElvUF.colors.DebuffHighlight.Disease = E:SetColorTable(ElvUF.colors.DebuffHighlight.Disease, db.debuffHighlight.Disease)
+	ElvUF.colors.DebuffHighlight.Disease = E:SetColorTable(ElvUF.colors.DebuffHighlight.Disease,
+		db.debuffHighlight.Disease)
 	ElvUF.colors.DebuffHighlight.Poison = E:SetColorTable(ElvUF.colors.DebuffHighlight.Poison, db.debuffHighlight.Poison)
 end
 
@@ -421,7 +443,7 @@ function UF:Update_FontStrings()
 end
 
 function UF:Construct_Fader()
-	return {UpdateRange = UF.UpdateRange}
+	return { UpdateRange = UF.UpdateRange }
 end
 
 function UF:Configure_Fader(frame)
@@ -463,7 +485,10 @@ function UF:Configure_FontString(obj)
 end
 
 function UF:Update_AllFrames()
-	if InCombatLockdown() then self:RegisterEvent("PLAYER_REGEN_ENABLED") return end
+	if InCombatLockdown() then
+		self:RegisterEvent("PLAYER_REGEN_ENABLED")
+		return
+	end
 	if E.private.unitframe.enable ~= true then return end
 
 	self:UpdateColors()
@@ -497,17 +522,20 @@ function UF:Update_AllFrames()
 end
 
 function UF:CreateAndUpdateUFGroup(group, numGroup)
-	if InCombatLockdown() then self:RegisterEvent("PLAYER_REGEN_ENABLED") return end
+	if InCombatLockdown() then
+		self:RegisterEvent("PLAYER_REGEN_ENABLED")
+		return
+	end
 
 	for i = 1, numGroup do
-		local unit = group..i
+		local unit = group .. i
 		local frameName = E:StringTitle(unit)
 		frameName = gsub(frameName, "t(arget)", "T%1")
 		local frame = self[unit]
 
 		if not frame then
 			self.groupunits[unit] = group
-			frame = ElvUF:Spawn(unit, "ElvUF_"..frameName)
+			frame = ElvUF:Spawn(unit, "ElvUF_" .. frameName)
 			frame.index = i
 			frame:SetParent(ElvUF_Parent)
 			frame:SetID(i)
@@ -517,7 +545,7 @@ function UF:CreateAndUpdateUFGroup(group, numGroup)
 		frameName = E:StringTitle(group)
 		frameName = gsub(frameName, "t(arget)", "T%1")
 		frame.Update = function()
-			UF["Update_"..E:StringTitle(frameName).."Frames"](self, frame, self.db.units[group])
+			UF["Update_" .. E:StringTitle(frameName) .. "Frames"](self, frame, self.db.units[group])
 		end
 
 		if self.db.units[group].enable then
@@ -561,7 +589,8 @@ function UF.groupPrototype:Configure_Groups(frame)
 	local point
 	local width, height, newCols, newRows = 0, 0, 0, 0
 	local direction = db.growthDirection
-	local xMult, yMult = DIRECTION_TO_HORIZONTAL_SPACING_MULTIPLIER[direction], DIRECTION_TO_VERTICAL_SPACING_MULTIPLIER[direction]
+	local xMult, yMult = DIRECTION_TO_HORIZONTAL_SPACING_MULTIPLIER[direction],
+		DIRECTION_TO_VERTICAL_SPACING_MULTIPLIER[direction]
 	local UNIT_HEIGHT = db.infoPanel and db.infoPanel.enable and (db.height + db.infoPanel.height) or db.height
 	local groupSpacing = db.groupSpacing
 
@@ -576,7 +605,8 @@ function UF.groupPrototype:Configure_Groups(frame)
 
 			UF:ConvertGroupDB(group)
 			if point == "LEFT" or point == "RIGHT" then
-				group:SetAttribute("xOffset", db.horizontalSpacing * DIRECTION_TO_HORIZONTAL_SPACING_MULTIPLIER[direction])
+				group:SetAttribute("xOffset",
+					db.horizontalSpacing * DIRECTION_TO_HORIZONTAL_SPACING_MULTIPLIER[direction])
 				group:SetAttribute("yOffset", 0)
 				group:SetAttribute("columnSpacing", db.verticalSpacing)
 			else
@@ -622,13 +652,13 @@ function UF.groupPrototype:Configure_Groups(frame)
 				group:SetAttribute("groupFilter", tostring(i))
 			end
 
-		--	group:Show()
+			--	group:Show()
 		end
 
 		--MATH!! WOOT
 		point = DIRECTION_TO_GROUP_ANCHOR_POINT[direction]
 		if db.raidWideSorting and db.startFromCenter then
-			point = DIRECTION_TO_GROUP_ANCHOR_POINT["OUT_"..direction]
+			point = DIRECTION_TO_GROUP_ANCHOR_POINT["OUT_" .. direction]
 		end
 		if (i - 1) % db.groupsPerRowCol == 0 then
 			if DIRECTION_TO_POINT[direction] == "LEFT" or DIRECTION_TO_POINT[direction] == "RIGHT" then
@@ -654,7 +684,9 @@ function UF.groupPrototype:Configure_Groups(frame)
 					width = width + ((db.width + db.horizontalSpacing) * 5) + groupSpacing
 					newCols = newCols + 1
 				elseif group then
-					group:Point(point, frame, point, ((((db.width + db.horizontalSpacing) * 5) * ((i - 1) % db.groupsPerRowCol)) + ((i - 1) % db.groupsPerRowCol)*groupSpacing) * xMult, (((UNIT_HEIGHT + db.verticalSpacing+groupSpacing) * (newRows - 1))) * yMult)
+					group:Point(point, frame, point,
+						((((db.width + db.horizontalSpacing) * 5) * ((i - 1) % db.groupsPerRowCol)) + ((i - 1) % db.groupsPerRowCol) * groupSpacing) *
+						xMult, (((UNIT_HEIGHT + db.verticalSpacing + groupSpacing) * (newRows - 1))) * yMult)
 				end
 			else
 				if newCols == 1 then
@@ -664,7 +696,10 @@ function UF.groupPrototype:Configure_Groups(frame)
 					height = height + ((UNIT_HEIGHT + db.verticalSpacing) * 5) + groupSpacing
 					newRows = newRows + 1
 				elseif group then
-					group:Point(point, frame, point, (((db.width + db.horizontalSpacing +groupSpacing) * (newCols - 1))) * xMult, ((((UNIT_HEIGHT + db.verticalSpacing) * 5) * ((i-1) % db.groupsPerRowCol))+((i-1) % db.groupsPerRowCol)*groupSpacing) * yMult)
+					group:Point(point, frame, point,
+						(((db.width + db.horizontalSpacing + groupSpacing) * (newCols - 1))) * xMult,
+						((((UNIT_HEIGHT + db.verticalSpacing) * 5) * ((i - 1) % db.groupsPerRowCol)) + ((i - 1) % db.groupsPerRowCol) * groupSpacing) *
+						yMult)
 				end
 			end
 		end
@@ -677,11 +712,11 @@ function UF.groupPrototype:Configure_Groups(frame)
 	end
 
 	if not frame.isInstanceForced then
-		frame.dirtyWidth = width - db.horizontalSpacing -groupSpacing
-		frame.dirtyHeight = height - db.verticalSpacing -groupSpacing
+		frame.dirtyWidth = width - db.horizontalSpacing - groupSpacing
+		frame.dirtyHeight = height - db.verticalSpacing - groupSpacing
 	end
 
-	frame:Size(width - db.horizontalSpacing -groupSpacing, height - db.verticalSpacing - groupSpacing)
+	frame:Size(width - db.horizontalSpacing - groupSpacing, height - db.verticalSpacing - groupSpacing)
 end
 
 function UF.groupPrototype:Update(frame)
@@ -695,23 +730,23 @@ function UF.groupPrototype:Update(frame)
 end
 
 function UF.groupPrototype:AdjustVisibility(frame)
---	if not frame.isForced then
-		local numGroups = frame.numGroups
-		for i = 1, #frame.groups do
-			local group = frame.groups[i]
-			if (i <= numGroups) and ((frame.db.raidWideSorting and i <= 1) or not frame.db.raidWideSorting) then
-				group:Show()
+	--	if not frame.isForced then
+	local numGroups = frame.numGroups
+	for i = 1, #frame.groups do
+		local group = frame.groups[i]
+		if (i <= numGroups) and ((frame.db.raidWideSorting and i <= 1) or not frame.db.raidWideSorting) then
+			group:Show()
+		else
+			if group.forceShow then
+				group:Hide()
+				UF:UnshowChildUnits(group, group:GetChildren())
+				group:SetAttribute("startingIndex", 1)
 			else
-				if group.forceShow then
-					group:Hide()
-					UF:UnshowChildUnits(group, group:GetChildren())
-					group:SetAttribute("startingIndex", 1)
-				else
-					group:Reset(frame.groupName)
-				end
+				group:Reset(frame.groupName)
 			end
 		end
---	end
+	end
+	--	end
 end
 
 function UF.headerPrototype:ClearChildPoints()
@@ -724,24 +759,24 @@ end
 function UF.headerPrototype:Update()
 	local group = self.groupName
 	local db = UF.db.units[group]
-	UF["Update_"..E:StringTitle(group).."Header"](UF, self, db)
+	UF["Update_" .. E:StringTitle(group) .. "Header"](UF, self, db)
 
 	local i = 1
-	local child = self:GetAttribute("child"..i)
+	local child = self:GetAttribute("child" .. i)
 
 	while child do
-		UF["Update_"..E:StringTitle(group).."Frames"](UF, child, db)
+		UF["Update_" .. E:StringTitle(group) .. "Frames"](UF, child, db)
 
-		if _G[child:GetName().."Pet"] then
-			UF["Update_"..E:StringTitle(group).."Frames"](UF, _G[child:GetName().."Pet"], db)
+		if _G[child:GetName() .. "Pet"] then
+			UF["Update_" .. E:StringTitle(group) .. "Frames"](UF, _G[child:GetName() .. "Pet"], db)
 		end
 
-		if _G[child:GetName().."Target"] then
-			UF["Update_"..E:StringTitle(group).."Frames"](UF, _G[child:GetName().."Target"], db)
+		if _G[child:GetName() .. "Target"] then
+			UF["Update_" .. E:StringTitle(group) .. "Frames"](UF, _G[child:GetName() .. "Target"], db)
 		end
 
 		i = i + 1
-		child = self:GetAttribute("child"..i)
+		child = self:GetAttribute("child" .. i)
 	end
 end
 
@@ -773,13 +808,13 @@ end
 
 function UF:CreateHeader(parent, groupFilter, overrideName, template, groupName, headerTemplate)
 	local group = parent.groupName or groupName
-	ElvUF:SetActiveStyle("ElvUF_"..E:StringTitle(group))
+	ElvUF:SetActiveStyle("ElvUF_" .. E:StringTitle(group))
 	local header = ElvUF:SpawnHeader(overrideName, headerTemplate, nil,
-			"groupFilter", groupFilter,
-			"showParty", true,
-			"showRaid", group ~= "party" and true or false,
-			"showSolo", true,
-			template and "template", template)
+		"groupFilter", groupFilter,
+		"showParty", true,
+		"showRaid", group ~= "party" and true or false,
+		"showSolo", true,
+		template and "template", template)
 
 	header.groupName = group
 	header:SetParent(parent)
@@ -793,7 +828,10 @@ function UF:CreateHeader(parent, groupFilter, overrideName, template, groupName,
 end
 
 function UF:CreateAndUpdateHeaderGroup(group, groupFilter, template, headerUpdate, headerTemplate)
-	if InCombatLockdown() then self:RegisterEvent("PLAYER_REGEN_ENABLED") return end
+	if InCombatLockdown() then
+		self:RegisterEvent("PLAYER_REGEN_ENABLED")
+		return
+	end
 	local db = self.db.units[group]
 	local raidFilter = UF.db.smartRaidFilter
 	local numGroups = db.numGroups
@@ -806,18 +844,18 @@ function UF:CreateAndUpdateHeaderGroup(group, groupFilter, template, headerUpdat
 			end
 
 			if maxPlayers > 0 then
-				numGroups = E:Round(maxPlayers/5)
+				numGroups = E:Round(maxPlayers / 5)
 			end
 		end
 	end
 
 	if not self[group] then
 		local stringTitle = E:StringTitle(group)
-		ElvUF:RegisterStyle("ElvUF_"..stringTitle, UF["Construct_"..stringTitle.."Frames"])
-		ElvUF:SetActiveStyle("ElvUF_"..stringTitle)
+		ElvUF:RegisterStyle("ElvUF_" .. stringTitle, UF["Construct_" .. stringTitle .. "Frames"])
+		ElvUF:SetActiveStyle("ElvUF_" .. stringTitle)
 
 		if db.numGroups then
-			self[group] = CreateFrame("Frame", "ElvUF_"..stringTitle, ElvUF_Parent, "SecureHandlerStateTemplate")
+			self[group] = CreateFrame("Frame", "ElvUF_" .. stringTitle, ElvUF_Parent, "SecureHandlerStateTemplate")
 			self[group]:Hide()
 			self[group].groups = {}
 			self[group].groupName = group
@@ -828,7 +866,8 @@ function UF:CreateAndUpdateHeaderGroup(group, groupFilter, template, headerUpdat
 				UF.headerFunctions[group][k] = v
 			end
 		else
-			self[group] = self:CreateHeader(ElvUF_Parent, groupFilter, "ElvUF_"..E:StringTitle(group), template, group, headerTemplate)
+			self[group] = self:CreateHeader(ElvUF_Parent, groupFilter, "ElvUF_" .. E:StringTitle(group), template, group,
+				headerTemplate)
 		end
 
 		self[group].db = db
@@ -840,16 +879,21 @@ function UF:CreateAndUpdateHeaderGroup(group, groupFilter, template, headerUpdat
 	if numGroups then
 		if db.raidWideSorting then
 			if not self[group].groups[1] then
-				self[group].groups[1] = self:CreateHeader(self[group], nil, "ElvUF_"..E:StringTitle(self[group].groupName).."Group1", template or self[group].template, nil, headerTemplate or self[group].headerTemplate)
+				self[group].groups[1] = self:CreateHeader(self[group], nil,
+					"ElvUF_" .. E:StringTitle(self[group].groupName) .. "Group1", template or self[group].template, nil,
+					headerTemplate or self[group].headerTemplate)
 			end
 		else
 			while numGroups > #self[group].groups do
 				local index = tostring(#self[group].groups + 1)
-				tinsert(self[group].groups, self:CreateHeader(self[group], index, "ElvUF_"..E:StringTitle(self[group].groupName).."Group"..index, template or self[group].template, nil, headerTemplate or self[group].headerTemplate))
+				tinsert(self[group].groups,
+					self:CreateHeader(self[group], index, "ElvUF_" ..
+						E:StringTitle(self[group].groupName) .. "Group" .. index, template or self[group].template, nil,
+						headerTemplate or self[group].headerTemplate))
 			end
 		end
 
-	--	UF.headerFunctions[group]:AdjustVisibility(self[group])
+		--	UF.headerFunctions[group]:AdjustVisibility(self[group])
 
 		if headerUpdate or not self[group].mover then
 			UF.headerFunctions[group]:Configure_Groups(self[group])
@@ -884,7 +928,7 @@ function UF:CreateAndUpdateHeaderGroup(group, groupFilter, template, headerUpdat
 
 		if not UF.headerFunctions[group] then UF.headerFunctions[group] = {} end
 		UF.headerFunctions[group].Update = function()
-		--	local db = UF.db.units[group]
+			--	local db = UF.db.units[group]
 			if db.enable ~= true then
 				UnregisterStateDriver(UF[group], "visibility")
 				UF[group]:Hide()
@@ -893,18 +937,20 @@ function UF:CreateAndUpdateHeaderGroup(group, groupFilter, template, headerUpdat
 				end
 				return
 			end
-			UF["Update_"..E:StringTitle(group).."Header"](UF, UF[group], db)
+			UF["Update_" .. E:StringTitle(group) .. "Header"](UF, UF[group], db)
 
 			for i = 1, UF[group]:GetNumChildren() do
 				local child = select(i, UF[group]:GetChildren())
-				UF["Update_"..E:StringTitle(group).."Frames"](UF, child, UF.db.units[group])
+				UF["Update_" .. E:StringTitle(group) .. "Frames"](UF, child, UF.db.units[group])
 
-				if _G[child:GetName().."Target"] then
-					UF["Update_"..E:StringTitle(group).."Frames"](UF, _G[child:GetName().."Target"], UF.db.units[group])
+				if _G[child:GetName() .. "Target"] then
+					UF["Update_" .. E:StringTitle(group) .. "Frames"](UF, _G[child:GetName() .. "Target"],
+						UF.db.units[group])
 				end
 
-				if _G[child:GetName().."Pet"] then
-					UF["Update_"..E:StringTitle(group).."Frames"](UF, _G[child:GetName().."Pet"], UF.db.units[group])
+				if _G[child:GetName() .. "Pet"] then
+					UF["Update_" .. E:StringTitle(group) .. "Frames"](UF, _G[child:GetName() .. "Pet"],
+						UF.db.units[group])
 				end
 			end
 
@@ -912,7 +958,7 @@ function UF:CreateAndUpdateHeaderGroup(group, groupFilter, template, headerUpdat
 		end
 
 		if headerUpdate then
-			UF["Update_"..E:StringTitle(group).."Header"](self, self[group], db)
+			UF["Update_" .. E:StringTitle(group) .. "Header"](self, self[group], db)
 		else
 			UF.headerFunctions[group]:Update(self[group])
 		end
@@ -926,17 +972,20 @@ end
 
 function UF:CreateAndUpdateUF(unit)
 	assert(unit, "No unit provided to create or update.")
-	if InCombatLockdown() then self:RegisterEvent("PLAYER_REGEN_ENABLED") return end
+	if InCombatLockdown() then
+		self:RegisterEvent("PLAYER_REGEN_ENABLED")
+		return
+	end
 
 	local frameName = E:StringTitle(unit)
 	frameName = gsub(frameName, "t(arget)", "T%1")
 	if not self[unit] then
-		self[unit] = ElvUF:Spawn(unit, "ElvUF_"..frameName)
+		self[unit] = ElvUF:Spawn(unit, "ElvUF_" .. frameName)
 		self.units[unit] = unit
 	end
 
 	self[unit].Update = function()
-		UF["Update_"..frameName.."Frame"](self, self[unit], self.db.units[unit])
+		UF["Update_" .. frameName .. "Frame"](self, self[unit], self.db.units[unit])
 	end
 
 	if self[unit]:GetParent() ~= ElvUF_Parent then
@@ -1088,33 +1137,33 @@ function ElvUF:DisableBlizzard(unit)
 		HandleFrame(FocusFrameToT)
 	elseif (unit == "targettarget") and E.private.unitframe.disabledBlizzardFrames.target then
 		HandleFrame(TargetFrameToT)
-	elseif (unit:match"(boss)%d?$" == "boss") and E.private.unitframe.disabledBlizzardFrames.boss then
-		local id = unit:match"boss(%d)"
+	elseif (unit:match "(boss)%d?$" == "boss") and E.private.unitframe.disabledBlizzardFrames.boss then
+		local id = unit:match "boss(%d)"
 
 		if id then
-			HandleFrame("Boss"..id.."TargetFrame")
+			HandleFrame("Boss" .. id .. "TargetFrame")
 		else
 			for i = 1, MAX_BOSS_FRAMES do
 				HandleFrame(format("Boss%dTargetFrame", i))
 			end
 		end
-	elseif (unit:match"(party)%d?$" == "party") and E.private.unitframe.disabledBlizzardFrames.party then
-		local id = unit:match"party(%d)"
+	elseif (unit:match "(party)%d?$" == "party") and E.private.unitframe.disabledBlizzardFrames.party then
+		local id = unit:match "party(%d)"
 
 		if id then
-			HandleFrame("PartyMemberFrame"..id)
+			HandleFrame("PartyMemberFrame" .. id)
 		else
 			for i = 1, 4 do
 				HandleFrame(format("PartyMemberFrame%d", i))
 			end
 		end
 		HandleFrame(PartyMemberBackground)
-	elseif (unit:match"(arena)%d?$" == "arena") and E.private.unitframe.disabledBlizzardFrames.arena then
-		local id = unit:match"arena(%d)"
+	elseif (unit:match "(arena)%d?$" == "arena") and E.private.unitframe.disabledBlizzardFrames.arena then
+		local id = unit:match "arena(%d)"
 
 		if id then
-			HandleFrame("ArenaEnemyFrame"..id)
-			HandleFrame("ArenaEnemyFrame"..id.."PetFrame")
+			HandleFrame("ArenaEnemyFrame" .. id)
+			HandleFrame("ArenaEnemyFrame" .. id .. "PetFrame")
 		else
 			for i = 1, 5 do
 				HandleFrame(format("ArenaEnemyFrame%d", i))
@@ -1168,10 +1217,10 @@ end
 
 function UF:ToggleForceShowGroupFrames(unitGroup, numGroup)
 	for i = 1, numGroup do
-		if self[unitGroup..i] and not self[unitGroup..i].isForced then
-			UF:ForceShow(self[unitGroup..i])
-		elseif self[unitGroup..i] then
-			UF:UnforceShow(self[unitGroup..i])
+		if self[unitGroup .. i] and not self[unitGroup .. i].isForced then
+			UF:ForceShow(self[unitGroup .. i])
+		elseif self[unitGroup .. i] then
+			UF:UnforceShow(self[unitGroup .. i])
 		end
 	end
 end
@@ -1236,7 +1285,7 @@ function UF:UpdateBackdropTextureColor(r, g, b)
 	local n = self.isTransparent and (m * 2) or m
 
 	if self.invertColors then
-		local nn = n;n=m;m=nn
+		local nn = n; n = m; m = nn
 	end
 
 	if self.isTransparent then
@@ -1369,7 +1418,8 @@ function UF:Initialize()
 		InterfaceOptionsCombatPanelEnemyCastBarsOnPortrait:SetAlpha(0)
 		InterfaceOptionsCombatPanelEnemyCastBarsOnPortrait:EnableMouse(false)
 		InterfaceOptionsCombatPanelEnemyCastBarsOnNameplates:ClearAllPoints()
-		InterfaceOptionsCombatPanelEnemyCastBarsOnNameplates:Point(InterfaceOptionsCombatPanelEnemyCastBarsOnPortrait:GetPoint())
+		InterfaceOptionsCombatPanelEnemyCastBarsOnNameplates:Point(InterfaceOptionsCombatPanelEnemyCastBarsOnPortrait
+			:GetPoint())
 		InterfaceOptionsCombatPanelTargetOfTarget:SetScale(0.0001)
 		InterfaceOptionsCombatPanelTargetOfTarget:SetAlpha(0)
 		InterfaceOptionsDisplayPanelShowAggroPercentage:SetScale(0.0001)

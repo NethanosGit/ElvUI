@@ -38,13 +38,13 @@ local RAID_CLASS_COLORS = RAID_CLASS_COLORS
 
 local lastChildern, numChildren, hasTarget = 0, 0
 local OVERLAY = [=[Interface\TargetingFrame\UI-TargetingFrame-Flash]=]
-local FSPAT = "%s*"..(gsub(gsub(_G.FOREIGN_SERVER_LABEL, "^%s", ""), "[%*()]", "%%%1")).."$"
+local FSPAT = "%s*" .. (gsub(gsub(_G.FOREIGN_SERVER_LABEL, "^%s", ""), "[%*()]", "%%%1")) .. "$"
 
 local RaidIconCoordinate = {
-	[0] = {[0] = "STAR", [0.25] = "MOON"},
-	[0.25] = {[0] = "CIRCLE", [0.25] = "SQUARE"},
-	[0.5] = {[0] = "DIAMOND", [0.25] = "CROSS"},
-	[0.75] = {[0] = "TRIANGLE", [0.25] = "SKULL"}
+	[0] = { [0] = "STAR", [0.25] = "MOON" },
+	[0.25] = { [0] = "CIRCLE", [0.25] = "SQUARE" },
+	[0.5] = { [0] = "DIAMOND", [0.25] = "CROSS" },
+	[0.75] = { [0] = "TRIANGLE", [0.25] = "SKULL" }
 }
 
 NP.CreatedPlates = {}
@@ -92,7 +92,7 @@ end
 function NP:GetPlateFrameLevel(frame)
 	local plateLevel
 	if frame.plateID then
-		plateLevel = 10 + frame.plateID*NP.levelStep
+		plateLevel = 10 + frame.plateID * NP.levelStep
 	end
 	return plateLevel
 end
@@ -106,14 +106,14 @@ function NP:SetPlateFrameLevel(frame, level, isTarget)
 			--level method: (10*(40*2)) max 800 + max 80 (40*2) = max 880
 			--highest possible should be level 880 and we add 1 to all so 881
 			local leveledCount = NP.CollectedFrameLevelCount or 1
-			level = (frame.FrameLevelChanged*(40*NP.levelStep)) + (leveledCount*NP.levelStep)
+			level = (frame.FrameLevelChanged * (40 * NP.levelStep)) + (leveledCount * NP.levelStep)
 		end
 
-		frame:SetFrameLevel(level+1)
---		frame.Glow:SetFrameLevel(frame:GetFrameLevel()-1)
-		frame.Shadow:SetFrameLevel(frame:GetFrameLevel()-1)
-		frame.Buffs:SetFrameLevel(level+1)
-		frame.Debuffs:SetFrameLevel(level+1)
+		frame:SetFrameLevel(level + 1)
+		--		frame.Glow:SetFrameLevel(frame:GetFrameLevel()-1)
+		frame.Shadow:SetFrameLevel(frame:GetFrameLevel() - 1)
+		frame.Buffs:SetFrameLevel(level + 1)
+		frame.Debuffs:SetFrameLevel(level + 1)
 	end
 end
 
@@ -166,8 +166,8 @@ function NP:StyleFrame(parent, noBackdrop, point)
 		point.borderright:SetTexture(unpack(E.media.bordercolor))
 	else
 		point.bordertop = parent:CreateTexture(nil, "OVERLAY")
-		point.bordertop:SetPoint("TOPLEFT", point, "TOPLEFT", -noscalemult, noscalemult*2)
-		point.bordertop:SetPoint("TOPRIGHT", point, "TOPRIGHT", noscalemult, noscalemult*2)
+		point.bordertop:SetPoint("TOPLEFT", point, "TOPLEFT", -noscalemult, noscalemult * 2)
+		point.bordertop:SetPoint("TOPRIGHT", point, "TOPRIGHT", noscalemult, noscalemult * 2)
 		point.bordertop:SetHeight(noscalemult)
 		point.bordertop:SetTexture(unpack(E.media.bordercolor))
 
@@ -178,20 +178,21 @@ function NP:StyleFrame(parent, noBackdrop, point)
 		point.bordertop.backdrop:SetTexture(0, 0, 0)
 
 		point.borderbottom = parent:CreateTexture(nil, "OVERLAY")
-		point.borderbottom:SetPoint("BOTTOMLEFT", point, "BOTTOMLEFT", -noscalemult, -noscalemult*2)
-		point.borderbottom:SetPoint("BOTTOMRIGHT", point, "BOTTOMRIGHT", noscalemult, -noscalemult*2)
+		point.borderbottom:SetPoint("BOTTOMLEFT", point, "BOTTOMLEFT", -noscalemult, -noscalemult * 2)
+		point.borderbottom:SetPoint("BOTTOMRIGHT", point, "BOTTOMRIGHT", noscalemult, -noscalemult * 2)
 		point.borderbottom:SetHeight(noscalemult)
 		point.borderbottom:SetTexture(unpack(E.media.bordercolor))
 
 		point.borderbottom.backdrop = parent:CreateTexture()
 		point.borderbottom.backdrop:SetPoint("BOTTOMLEFT", point.borderbottom, "BOTTOMLEFT", noscalemult, -noscalemult)
-		point.borderbottom.backdrop:SetPoint("BOTTOMRIGHT", point.borderbottom, "BOTTOMRIGHT", -noscalemult, -noscalemult)
+		point.borderbottom.backdrop:SetPoint("BOTTOMRIGHT", point.borderbottom, "BOTTOMRIGHT", -noscalemult, -
+			noscalemult)
 		point.borderbottom.backdrop:SetHeight(noscalemult * 3)
 		point.borderbottom.backdrop:SetTexture(0, 0, 0)
 
 		point.borderleft = parent:CreateTexture(nil, "OVERLAY")
-		point.borderleft:SetPoint("TOPLEFT", point, "TOPLEFT", -noscalemult*2, noscalemult*2)
-		point.borderleft:SetPoint("BOTTOMLEFT", point, "BOTTOMLEFT", noscalemult*2, -noscalemult*2)
+		point.borderleft:SetPoint("TOPLEFT", point, "TOPLEFT", -noscalemult * 2, noscalemult * 2)
+		point.borderleft:SetPoint("BOTTOMLEFT", point, "BOTTOMLEFT", noscalemult * 2, -noscalemult * 2)
 		point.borderleft:SetWidth(noscalemult)
 		point.borderleft:SetTexture(unpack(E.media.bordercolor))
 
@@ -202,8 +203,8 @@ function NP:StyleFrame(parent, noBackdrop, point)
 		point.borderleft.backdrop:SetTexture(0, 0, 0)
 
 		point.borderright = parent:CreateTexture(nil, "OVERLAY")
-		point.borderright:SetPoint("TOPRIGHT", point, "TOPRIGHT", noscalemult*2, noscalemult*2)
-		point.borderright:SetPoint("BOTTOMRIGHT", point, "BOTTOMRIGHT", -noscalemult*2, -noscalemult*2)
+		point.borderright:SetPoint("TOPRIGHT", point, "TOPRIGHT", noscalemult * 2, noscalemult * 2)
+		point.borderright:SetPoint("BOTTOMRIGHT", point, "BOTTOMRIGHT", -noscalemult * 2, -noscalemult * 2)
 		point.borderright:SetWidth(noscalemult)
 		point.borderright:SetTexture(unpack(E.media.bordercolor))
 
@@ -257,7 +258,7 @@ function NP:UnitClass(frame, unitType)
 		end
 	elseif unitType == "ENEMY_PLAYER" then
 		local _, g = frame.oldHealthBar:GetStatusBarColor()
-		return grenColorToClass[floor(g*100 + 0.5) / 100]
+		return grenColorToClass[floor(g * 100 + 0.5) / 100]
 	end
 end
 
@@ -280,7 +281,8 @@ function NP:UnitDetailedThreatSituation(frame)
 end
 
 function NP:UnitLevel(frame)
-	local level, boss = frame.oldLevel:GetObjectType() == "FontString" and tonumber(frame.oldLevel:GetText()) or false, frame.BossIcon:IsShown()
+	local level, boss = frame.oldLevel:GetObjectType() == "FontString" and tonumber(frame.oldLevel:GetText()) or false,
+		frame.BossIcon:IsShown()
 	if boss or not level then
 		return "??", 0.9, 0, 0
 	else
@@ -511,7 +513,8 @@ function NP:ForEachVisiblePlate(functionToRun, ...)
 end
 
 function NP:UpdateElement_All(frame, noTargetFrame, filterIgnore)
-	local healthShown = self.db.units[frame.UnitType].health.enable or (frame.isTarget and self.db.alwaysShowTargetHealth)
+	local healthShown = self.db.units[frame.UnitType].health.enable or
+		(frame.isTarget and self.db.alwaysShowTargetHealth)
 
 	self:Update_HealthBar(frame)
 
@@ -571,7 +574,8 @@ local plateID = 0
 function NP:OnCreated(frame)
 	plateID = plateID + 1
 	local Health, CastBar = frame:GetChildren()
-	local Threat, Border, CastBarBorder, CastBarShield, CastBarIcon, Highlight, Name, Level, BossIcon, RaidIcon, EliteIcon = frame:GetRegions()
+	local Threat, Border, CastBarBorder, CastBarShield, CastBarIcon, Highlight, Name, Level, BossIcon, RaidIcon, EliteIcon =
+		frame:GetRegions()
 
 	local unitFrame = CreateFrame("Frame", format("ElvUI_NamePlate%d", plateID), frame)
 	frame.UnitFrame = unitFrame
@@ -714,9 +718,9 @@ function NP:ScaleNameAndHealthText(frame, isTarget)
 	local nameFont = LSM:Fetch("font", dbName.font);
 	local hpFont = LSM:Fetch("font", dbHealth.text.font);
 
-	if isTarget then 
-		frame.Name:FontTemplate(nameFont, dbName.fontSize + 2, dbName.fontOutline)
-		frame.Health.Text:FontTemplate(hpFont, dbHealth.text.fontSize + 2, dbHealth.text.fontOutline)
+	if isTarget then
+		frame.Name:FontTemplate(nameFont, dbName.fontSize * 1.1, dbName.fontOutline)
+		frame.Health.Text:FontTemplate(hpFont, dbHealth.text.fontSize * 1.1, dbHealth.text.fontOutline)
 	else
 		frame.Name:FontTemplate(nameFont, dbName.fontSize, dbName.fontOutline)
 		frame.Health.Text:FontTemplate(hpFont, dbHealth.text.fontSize, dbHealth.text.fontOutline)
@@ -726,18 +730,23 @@ end
 function NP:RepositionNameAndHealthText(frame, isTarget)
 	local dbName = self.db.units[frame.UnitType].name;
 	local dbHealth = self.db.units[frame.UnitType].health;
-	
+
 	if isTarget then
-	frame.Name:Point(E.InversePoints[dbName.position], dbName.parent == "Nameplate" and frame or frame[dbName.parent], dbName.position, dbName.xOffset, dbName.yOffset - 1);
-	frame.Health.Text:Point(E.InversePoints[dbHealth.text.position], dbHealth.text.parent == "Nameplate" and frame or frame[dbHealth.text.parent], dbHealth.text.position, dbHealth.text.xOffset, dbHealth.text.yOffset - 1);
+		frame.Name:Point(E.InversePoints[dbName.position], dbName.parent == "Nameplate" and frame or frame
+			[dbName.parent], dbName.position, dbName.xOffset, dbName.yOffset - 1);
+		frame.Health.Text:Point(E.InversePoints[dbHealth.text.position],
+			dbHealth.text.parent == "Nameplate" and frame or frame[dbHealth.text.parent], dbHealth.text.position,
+			dbHealth.text.xOffset, dbHealth.text.yOffset - 1);
 	else
-		frame.Name:Point(E.InversePoints[dbName.position], dbName.parent == "Nameplate" and frame or frame[dbName.parent], dbName.position, dbName.xOffset, dbName.yOffset);
-		frame.Health.Text:Point(E.InversePoints[dbHealth.text.position], dbHealth.text.parent == "Nameplate" and frame or frame[dbHealth.text.parent], dbHealth.text.position, dbHealth.text.xOffset, dbHealth.text.yOffset);
+		frame.Name:Point(E.InversePoints[dbName.position], dbName.parent == "Nameplate" and frame or frame
+			[dbName.parent], dbName.position, dbName.xOffset, dbName.yOffset);
+		frame.Health.Text:Point(E.InversePoints[dbHealth.text.position],
+			dbHealth.text.parent == "Nameplate" and frame or frame[dbHealth.text.parent], dbHealth.text.position,
+			dbHealth.text.xOffset, dbHealth.text.yOffset);
 	end
 end
 
 function NP:SetTargetFrame(frame)
-
 	if hasTarget and frame.alpha == 1 then
 		if not frame.isTarget then
 			frame.isTarget = true
@@ -747,7 +756,7 @@ function NP:SetTargetFrame(frame)
 			if self.db.useTargetScale then
 				self:SetFrameScale(frame, (frame.ThreatScale or 1) * self.db.targetScale)
 			end
-        
+
 			NP:ScaleNameAndHealthText(frame, frame.isTarget);
 			NP:RepositionNameAndHealthText(frame, frame.isTarget);
 
@@ -762,7 +771,7 @@ function NP:SetTargetFrame(frame)
 
 			if not self.db.units[frame.UnitType].health.enable and self.db.alwaysShowTargetHealth then
 				frame.Health.r, frame.Health.g, frame.Health.b = nil, nil, nil
-	
+
 				self:Configure_HealthBar(frame)
 				self:Configure_CastBar(frame)
 				self:Configure_Elite(frame)
@@ -770,7 +779,7 @@ function NP:SetTargetFrame(frame)
 
 				self:RegisterEvents(frame)
 
-				self:UpdateElement_All(frame, true)	
+				self:UpdateElement_All(frame, true)
 			end
 
 			NP:PlateFade(frame, NP.db.fadeIn and 1 or 0, frame:GetAlpha(), 1)
@@ -1032,7 +1041,7 @@ function NP:UPDATE_MOUSEOVER_UNIT()
 		for frame in pairs(self.VisiblePlates) do
 			if frame.UnitName == name and frame.UnitType == unitType then
 				if not self.GUIDList[guid] then
-					self.GUIDList[guid] = {name = name, unitType = frame.UnitType}
+					self.GUIDList[guid] = { name = name, unitType = frame.UnitType }
 					self.OnShow(frame:GetParent(), nil, true)
 					break
 				end
@@ -1052,7 +1061,7 @@ function NP:PLAYER_FOCUS_CHANGED()
 		self.NameByUnit.focus = name
 
 		if not self.GUIDList[guid] then
-			self.GUIDList[guid] = {name = name, unitType = self:GetUnitTypeFromUnit("focus")}
+			self.GUIDList[guid] = { name = name, unitType = self:GetUnitTypeFromUnit("focus") }
 		end
 
 		unitName = name
@@ -1162,11 +1171,11 @@ function NP:CacheArenaUnits()
 	twipe(self.ENEMY_NPC)
 
 	for i = 1, 5 do
-		if UnitExists("arena"..i) then
+		if UnitExists("arena" .. i) then
 			local unit = format("arena%d", i)
 			self.ENEMY_PLAYER[UnitName(unit)] = unit
 		end
-		if UnitExists("arenapet"..i) then
+		if UnitExists("arenapet" .. i) then
 			local unit = format("arenapet%d", i)
 			self.ENEMY_NPC[UnitName(unit)] = unit
 		end
@@ -1178,14 +1187,14 @@ function NP:CacheGroupUnits()
 
 	if GetNumRaidMembers() > 0 then
 		for i = 1, 40 do
-			if UnitExists("raid"..i) then
+			if UnitExists("raid" .. i) then
 				local unit = format("raid%d", i)
 				self.FRIENDLY_PLAYER[UnitName(unit)] = unit
 			end
 		end
 	elseif GetNumPartyMembers() > 0 then
 		for i = 1, 5 do
-			if UnitExists("party"..i) then
+			if UnitExists("party" .. i) then
 				local unit = format("party%d", i)
 				self.FRIENDLY_PLAYER[UnitName(unit)] = unit
 			end
@@ -1198,21 +1207,21 @@ function NP:CacheGroupPetUnits()
 	twipe(self.ENEMY_NPC)
 
 	for i = 1, 5 do
-		if UnitExists("arenapet"..i) then
+		if UnitExists("arenapet" .. i) then
 			local unit = format("arenapet%d", i)
 			self.ENEMY_NPC[UnitName(unit)] = unit
 		end
 	end
 	if GetNumRaidMembers() > 0 then
 		for i = 1, 40 do
-			if UnitExists("raidpet"..i) then
+			if UnitExists("raidpet" .. i) then
 				local unit = format("raidpet%d", i)
 				self.FRIENDLY_NPC[UnitName(unit)] = unit
 			end
 		end
 	elseif GetNumPartyMembers() > 0 then
 		for i = 1, 5 do
-			if UnitExists("partypet"..i) then
+			if UnitExists("partypet" .. i) then
 				local unit = format("partypet%d", i)
 				self.FRIENDLY_NPC[UnitName(unit)] = unit
 			end

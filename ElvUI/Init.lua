@@ -32,8 +32,8 @@ local CallbackHandler = LibStub("CallbackHandler-1.0")
 local AddOnName, Engine = ...
 local AddOn = AceAddon:NewAddon(AddOnName, "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0", "AceHook-3.0")
 AddOn.callbacks = AddOn.callbacks or CallbackHandler:New(AddOn)
-AddOn.DF = {profile = {}, global = {}}; AddOn.privateVars = {profile = {}} -- Defaults
-AddOn.Options = {type = "group", name = AddOnName, args = {}}
+AddOn.DF = { profile = {}, global = {} }; AddOn.privateVars = { profile = {} } -- Defaults
+AddOn.Options = { type = "group", name = AddOnName, args = {} }
 
 Engine[1] = AddOn
 Engine[2] = {}
@@ -58,6 +58,7 @@ do
 
 	AddOn:AddLib("AceAddon", AceAddon, AceAddonMinor)
 	AddOn:AddLib("AceDB", "AceDB-3.0")
+	AddOn:AddLib('ACH', 'LibAceConfigHelper')
 	AddOn:AddLib("EP", "LibElvUIPlugin-1.0")
 	AddOn:AddLib("LSM", "LibSharedMedia-3.0")
 	AddOn:AddLib("ACL", "AceLocale-3.0-ElvUI")
@@ -80,30 +81,30 @@ do
 end
 
 AddOn.oUF = Engine.oUF
-AddOn.ActionBars = AddOn:NewModule("ActionBars","AceHook-3.0","AceEvent-3.0")
-AddOn.AFK = AddOn:NewModule("AFK","AceEvent-3.0","AceTimer-3.0")
-AddOn.Auras = AddOn:NewModule("Auras","AceHook-3.0","AceEvent-3.0")
-AddOn.Bags = AddOn:NewModule("Bags","AceHook-3.0","AceEvent-3.0","AceTimer-3.0")
-AddOn.Blizzard = AddOn:NewModule("Blizzard","AceEvent-3.0","AceHook-3.0")
-AddOn.Chat = AddOn:NewModule("Chat","AceTimer-3.0","AceHook-3.0","AceEvent-3.0")
-AddOn.DataBars = AddOn:NewModule("DataBars","AceEvent-3.0")
-AddOn.DataTexts = AddOn:NewModule("DataTexts","AceTimer-3.0","AceHook-3.0","AceEvent-3.0")
-AddOn.DebugTools = AddOn:NewModule("DebugTools","AceEvent-3.0","AceHook-3.0")
-AddOn.Distributor = AddOn:NewModule("Distributor","AceEvent-3.0","AceTimer-3.0","AceComm-3.0","AceSerializer-3.0")
-AddOn.Layout = AddOn:NewModule("Layout","AceEvent-3.0")
-AddOn.Minimap = AddOn:NewModule("Minimap","AceEvent-3.0")
-AddOn.Misc = AddOn:NewModule("Misc","AceEvent-3.0","AceTimer-3.0")
-AddOn.ModuleCopy = AddOn:NewModule("ModuleCopy","AceEvent-3.0","AceTimer-3.0","AceComm-3.0","AceSerializer-3.0")
-AddOn.NamePlates = AddOn:NewModule("NamePlates","AceHook-3.0","AceEvent-3.0","AceTimer-3.0")
+AddOn.ActionBars = AddOn:NewModule("ActionBars", "AceHook-3.0", "AceEvent-3.0")
+AddOn.AFK = AddOn:NewModule("AFK", "AceEvent-3.0", "AceTimer-3.0")
+AddOn.Auras = AddOn:NewModule("Auras", "AceHook-3.0", "AceEvent-3.0")
+AddOn.Bags = AddOn:NewModule("Bags", "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
+AddOn.Blizzard = AddOn:NewModule("Blizzard", "AceEvent-3.0", "AceHook-3.0")
+AddOn.Chat = AddOn:NewModule("Chat", "AceTimer-3.0", "AceHook-3.0", "AceEvent-3.0")
+AddOn.DataBars = AddOn:NewModule("DataBars", "AceEvent-3.0")
+AddOn.DataTexts = AddOn:NewModule("DataTexts", "AceTimer-3.0", "AceHook-3.0", "AceEvent-3.0")
+AddOn.DebugTools = AddOn:NewModule("DebugTools", "AceEvent-3.0", "AceHook-3.0")
+AddOn.Distributor = AddOn:NewModule("Distributor", "AceEvent-3.0", "AceTimer-3.0", "AceComm-3.0", "AceSerializer-3.0")
+AddOn.Layout = AddOn:NewModule("Layout", "AceEvent-3.0")
+AddOn.Minimap = AddOn:NewModule("Minimap", "AceEvent-3.0")
+AddOn.Misc = AddOn:NewModule("Misc", "AceEvent-3.0", "AceTimer-3.0")
+AddOn.ModuleCopy = AddOn:NewModule("ModuleCopy", "AceEvent-3.0", "AceTimer-3.0", "AceComm-3.0", "AceSerializer-3.0")
+AddOn.NamePlates = AddOn:NewModule("NamePlates", "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
 AddOn.PluginInstaller = AddOn:NewModule("PluginInstaller")
-AddOn.RaidUtility = AddOn:NewModule("RaidUtility","AceEvent-3.0")
+AddOn.RaidUtility = AddOn:NewModule("RaidUtility", "AceEvent-3.0")
 AddOn.ReminderBuffs = AddOn:NewModule("ReminderBuffs", "AceEvent-3.0")
-AddOn.Skins = AddOn:NewModule("Skins","AceTimer-3.0","AceHook-3.0","AceEvent-3.0")
-AddOn.Threat = AddOn:NewModule("Threat","AceEvent-3.0")
-AddOn.Tooltip = AddOn:NewModule("Tooltip","AceTimer-3.0","AceHook-3.0","AceEvent-3.0")
-AddOn.TotemBar = AddOn:NewModule("Totems","AceEvent-3.0")
-AddOn.UnitFrames = AddOn:NewModule("UnitFrames","AceTimer-3.0","AceEvent-3.0","AceHook-3.0")
-AddOn.WorldMap = AddOn:NewModule("WorldMap","AceHook-3.0","AceEvent-3.0","AceTimer-3.0")
+AddOn.Skins = AddOn:NewModule("Skins", "AceTimer-3.0", "AceHook-3.0", "AceEvent-3.0")
+AddOn.Threat = AddOn:NewModule("Threat", "AceEvent-3.0")
+AddOn.Tooltip = AddOn:NewModule("Tooltip", "AceTimer-3.0", "AceHook-3.0", "AceEvent-3.0")
+AddOn.TotemBar = AddOn:NewModule("Totems", "AceEvent-3.0")
+AddOn.UnitFrames = AddOn:NewModule("UnitFrames", "AceTimer-3.0", "AceEvent-3.0", "AceHook-3.0")
+AddOn.WorldMap = AddOn:NewModule("WorldMap", "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
 
 do
 	local arg2, arg3 = "([%(%)%.%%%+%-%*%?%[%^%$])", "%%%1"
@@ -135,7 +136,7 @@ function AddOn:OnInitialize()
 
 		local profileKey
 		if ElvDB.profileKeys then
-			profileKey = ElvDB.profileKeys[self.myname.." - "..self.myrealm]
+			profileKey = ElvDB.profileKeys[self.myname .. " - " .. self.myrealm]
 		end
 
 		if profileKey and ElvDB.profiles and ElvDB.profiles[profileKey] then
@@ -148,7 +149,7 @@ function AddOn:OnInitialize()
 	if ElvPrivateDB then
 		local profileKey
 		if ElvPrivateDB.profileKeys then
-			profileKey = ElvPrivateDB.profileKeys[self.myname.." - "..self.myrealm]
+			profileKey = ElvPrivateDB.profileKeys[self.myname .. " - " .. self.myrealm]
 		end
 
 		if profileKey and ElvPrivateDB.profiles and ElvPrivateDB.profiles[profileKey] then
@@ -248,7 +249,7 @@ function AddOn:ResetProfile()
 	local profileKey
 
 	if ElvPrivateDB.profileKeys then
-		profileKey = ElvPrivateDB.profileKeys[self.myname.." - "..self.myrealm]
+		profileKey = ElvPrivateDB.profileKeys[self.myname .. " - " .. self.myrealm]
 
 		if profileKey and ElvPrivateDB.profiles and ElvPrivateDB.profiles[profileKey] then
 			ElvPrivateDB.profiles[profileKey] = nil
@@ -283,7 +284,7 @@ function AddOn:UpdateConfigSize(reset)
 
 	local maxWidth, maxHeight = self.UIParent:GetSize()
 	frame:SetMinResize(600, 500)
-	frame:SetMaxResize(maxWidth-50, maxHeight-50)
+	frame:SetMaxResize(maxWidth - 50, maxHeight - 50)
 
 	self.Libs.AceConfigDialog:SetDefaultSize(AddOnName, self:GetConfigDefaultSize())
 
@@ -316,8 +317,10 @@ end
 
 function AddOn:ConfigStopMovingOrSizing()
 	if self.obj and self.obj.status then
-		AddOn.configSavedPositionTop, AddOn.configSavedPositionLeft = AddOn:Round(self:GetTop(), 2), AddOn:Round(self:GetLeft(), 2)
-		AddOn.global.general.AceGUI.width, AddOn.global.general.AceGUI.height = AddOn:Round(self:GetWidth(), 2), AddOn:Round(self:GetHeight(), 2)
+		AddOn.configSavedPositionTop, AddOn.configSavedPositionLeft = AddOn:Round(self:GetTop(), 2),
+			AddOn:Round(self:GetLeft(), 2)
+		AddOn.global.general.AceGUI.width, AddOn.global.general.AceGUI.height = AddOn:Round(self:GetWidth(), 2),
+			AddOn:Round(self:GetHeight(), 2)
 	end
 end
 
@@ -359,8 +362,8 @@ function AddOn:ToggleOptionsUI(msg)
 
 	local pages, msgStr
 	if msg and msg ~= "" then
-		pages = {strsplit(",", msg)}
-		msgStr = gsub(msg, ",","\001")
+		pages = { strsplit(",", msg) }
+		msgStr = gsub(msg, ",", "\001")
 	end
 
 	local mode = "Close"
@@ -376,13 +379,15 @@ function AddOn:ToggleOptionsUI(msg)
 					if i == 1 then
 						main = pages[i] and ACD and ACD.Status and ACD.Status.ElvUI
 						mainSel = main and main.status and main.status.groups and main.status.groups.selected
-						mainSelStr = mainSel and ("^"..self:EscapeString(mainSel).."\001")
+						mainSelStr = mainSel and ("^" .. self:EscapeString(mainSel) .. "\001")
 						mainNode = main and main.children and main.children[pages[i]]
 						pageNodes[index + 1], pageNodes[index + 2] = main, mainNode
 					else
-						sub = pages[i] and pageNodes[i] and ((i == pageCount and pageNodes[i]) or pageNodes[i].children[pages[i]])
+						sub = pages[i] and pageNodes[i] and
+						((i == pageCount and pageNodes[i]) or pageNodes[i].children[pages[i]])
 						subSel = sub and sub.status and sub.status.groups and sub.status.groups.selected
-						subNode = (mainSelStr and msgStr:match(mainSelStr..self:EscapeString(pages[i]).."$") and (subSel and subSel == pages[i])) or ((i == pageCount and not subSel) and mainSel and mainSel == msgStr)
+						subNode = (mainSelStr and msgStr:match(mainSelStr .. self:EscapeString(pages[i]) .. "$") and (subSel and subSel == pages[i])) or
+						((i == pageCount and not subSel) and mainSel and mainSel == msgStr)
 						pageNodes[index + 1], pageNodes[index + 2] = sub, subNode
 					end
 					index = index + 2

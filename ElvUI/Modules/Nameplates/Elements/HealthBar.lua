@@ -69,7 +69,8 @@ function NP:Update_HealthColor(frame)
 				r, g, b = db.reactions.neutral.r, db.reactions.neutral.g, db.reactions.neutral.b
 			elseif reactionType and reactionType > 4 then
 				if frame.UnitType == "FRIENDLY_PLAYER" then
-					r, g, b = db.reactions.friendlyPlayer.r, db.reactions.friendlyPlayer.g, db.reactions.friendlyPlayer.b
+					r, g, b = db.reactions.friendlyPlayer.r, db.reactions.friendlyPlayer.g, db.reactions.friendlyPlayer
+					.b
 				else
 					r, g, b = db.reactions.good.r, db.reactions.good.g, db.reactions.good.b
 				end
@@ -173,7 +174,9 @@ function NP:Configure_HealthBar(frame, configuring)
 
 		if db.text.enable then
 			healthBar.Text:ClearAllPoints()
-			healthBar.Text:Point(E.InversePoints[db.text.position], db.text.parent == "Nameplate" and frame or frame[db.text.parent], db.text.position, db.text.xOffset, db.text.yOffset)
+			healthBar.Text:Point(E.InversePoints[db.text.position],
+				db.text.parent == "Nameplate" and frame or frame[db.text.parent], db.text.position, db.text.xOffset,
+				db.text.yOffset)
 			healthBar.Text:FontTemplate(LSM:Fetch("font", db.text.font), db.text.fontSize, db.text.fontOutline)
 			healthBar.Text:Show()
 		else

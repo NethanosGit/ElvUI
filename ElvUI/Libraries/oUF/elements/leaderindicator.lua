@@ -37,13 +37,13 @@ local function Update(self, event)
 
 	* self - the LeaderIndicator element
 	--]]
-	if(element.PreUpdate) then
+	if (element.PreUpdate) then
 		element:PreUpdate()
 	end
 
 	local unit = self.unit
 	local isLeader = (UnitInParty(unit) or UnitInRaid(unit)) and UnitIsPartyLeader(unit)
-	if(isLeader) then
+	if (isLeader) then
 		element:Show()
 	else
 		element:Hide()
@@ -55,7 +55,7 @@ local function Update(self, event)
 	* self     - the LeaderIndicator element
 	* isLeader - indicates whether the element is shown (boolean)
 	--]]
-	if(element.PostUpdate) then
+	if (element.PostUpdate) then
 		return element:PostUpdate(isLeader)
 	end
 end
@@ -68,7 +68,7 @@ local function Path(self, ...)
 	* event - the event triggering the update (string)
 	* ...   - the arguments accompanying the event
 	--]]
-	return (self.LeaderIndicator.Override or Update) (self, ...)
+	return (self.LeaderIndicator.Override or Update)(self, ...)
 end
 
 local function ForceUpdate(element)
@@ -77,7 +77,7 @@ end
 
 local function Enable(self)
 	local element = self.LeaderIndicator
-	if(element) then
+	if (element) then
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
 
@@ -85,7 +85,7 @@ local function Enable(self)
 		self:RegisterEvent('PARTY_MEMBERS_CHANGED', Path, true)
 		self:RegisterEvent('RAID_ROSTER_UPDATE', Path, true)
 
-		if(element:IsObjectType('Texture') and not element:GetTexture()) then
+		if (element:IsObjectType('Texture') and not element:GetTexture()) then
 			element:SetTexture([[Interface\GroupFrame\UI-Group-LeaderIcon]])
 		end
 
@@ -95,7 +95,7 @@ end
 
 local function Disable(self)
 	local element = self.LeaderIndicator
-	if(element) then
+	if (element) then
 		element:Hide()
 
 		self:UnregisterEvent('PARTY_LEADER_CHANGED', Path)

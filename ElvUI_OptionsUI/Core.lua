@@ -6,16 +6,9 @@ Engine[1] = {}
 Engine[2] = E.Libs.ACL:GetLocale("ElvUI", E.global.general.locale or "enUS")
 local C, L = Engine[1], Engine[2]
 
+
 local format = string.format
 
-C.Values = {
-	FontFlags = {
-		["NONE"] = L["NONE"],
-		["OUTLINE"] = "OUTLINE",
-		["MONOCHROMEOUTLINE"] = "MONOCROMEOUTLINE",
-		["THICKOUTLINE"] = "THICKOUTLINE"
-	}
-}
 
 E:AddLib("AceGUI", "AceGUI-3.0")
 E:AddLib("AceConfig", "AceConfig-3.0-ElvUI")
@@ -23,6 +16,10 @@ E:AddLib("AceConfigDialog", "AceConfigDialog-3.0-ElvUI")
 E:AddLib("AceConfigRegistry", "AceConfigRegistry-3.0-ElvUI")
 E:AddLib("AceDBOptions", "AceDBOptions-3.0")
 
+local ACH = E.Libs.ACH
+C.Values = {
+	FontFlags = ACH.FontValues
+}
 local UnitName = UnitName
 local UnitExists = UnitExists
 local UnitIsUnit = UnitIsUnit
@@ -427,7 +424,7 @@ E.Options.args.profiles.plugins.ElvUI = {
 		desc = L["Sends your current profile to your target."],
 		func = function()
 			if not UnitExists("target") or not UnitIsPlayer("target")
-			or not UnitIsFriend("player", "target") or UnitIsUnit("player", "target") then
+				or not UnitIsFriend("player", "target") or UnitIsUnit("player", "target") then
 				E:Print(L["You must be targeting a player."])
 				return
 			end
@@ -447,7 +444,7 @@ E.Options.args.profiles.plugins.ElvUI = {
 		desc = L["Sends your filter settings to your target."],
 		func = function()
 			if not UnitExists("target") or not UnitIsPlayer("target")
-			or not UnitIsFriend("player", "target") or UnitIsUnit("player", "target") then
+				or not UnitIsFriend("player", "target") or UnitIsUnit("player", "target") then
 				E:Print(L["You must be targeting a player."])
 				return
 			end
